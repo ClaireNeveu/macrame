@@ -2,7 +2,7 @@ package macrame
 
 import reflect.macros.blackbox.Context
 
-package object function {
+package object internal {
 
    /**
     * Finds a method with the given name accessible on the given object in the

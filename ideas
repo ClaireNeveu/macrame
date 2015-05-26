@@ -1,0 +1,2 @@
+1. Validate regular expressions at compile time with the `r` string interpolator.
+2. Auto-derive scalaz.Show and scalaz.Equal instances. Include a `deriving` annotation that must be present to auto-derive the instance.
