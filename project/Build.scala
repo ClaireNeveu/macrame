@@ -12,7 +12,9 @@ object Build extends Build {
       "macrame",
       file("."),
       settings = commonSettings ++ Seq(
-         libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-compiler" % _)
+         libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-compiler" % _),
+         libraryDependencies += compilerPlugin(
+            "org.scalamacros" % "paradise" % "2.1.0-M5" cross CrossVersion.full)
       )
    )
 
@@ -27,7 +29,7 @@ object Build extends Build {
          "-language:higherKinds",
          "-language:postfixOps"
       ),
-		ScalariformKeys.preferences := ScalariformKeys.preferences.value
+      ScalariformKeys.preferences := ScalariformKeys.preferences.value
          .setPreference(IndentSpaces, 3)
          .setPreference(SpaceBeforeColon, true)
          .setPreference(PreserveDanglingCloseParenthesis, true)

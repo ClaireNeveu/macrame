@@ -86,7 +86,7 @@ package object macrame {
       def memberMap[T : c.WeakTypeTag](c : Context)(obj : c.Expr[Object]) : c.Expr[Map[String, T]] = {
          import c.universe._
 
-         val tups = sequenceExpr(c)(fn.members(c)(obj)
+         val tups = fn.sequenceExpr(c)(fn.members(c)(obj)
             .map(_.name.decodedName.toString.trim)
             .map(n ⇒
                // ("n", obj.n)
