@@ -1,5 +1,6 @@
 package macrame
 
 class RegexTest {
-   val Foo = r"foo"
+   val str = "bar"
+   val Foo = trace(r"foo)?")
 }
