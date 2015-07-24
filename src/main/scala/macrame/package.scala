@@ -58,11 +58,8 @@ package object macrame {
                regex.r
             } catch {
                case e : java.util.regex.PatternSyntaxException ⇒
-                  println(e.getMessage)
-                  val pos = c.prefix.tree.pos.withPoint(getPoint(e.getMessage) + c.prefix.tree.pos.point)
+                  val pos = s.head.pos.withPoint(getPoint(e.getMessage) + s.head.pos.point)
                   c.abort(pos, "Invalid Regex: " + e.getMessage.split("\n").head)
-               case e : Throwable ⇒
-                  c.abort(c.prefix.tree.pos, e.getMessage)
             }
 
             val mixed : List[(Tree, Tree)] = s.zipAll(

@@ -1,9 +1,10 @@
 package macrame
 
 class EnumTest {
-   @enum('fromString) class TrafficColor {
+   @enum class TrafficColor {
       Red
       Yellow
       Green
+      // Blue
    }
 }

@@ -1,12 +1,14 @@
 package macrame
 
+import macrame.internal.renderName
+
 import scala.reflect.macros.Context
 import scala.language.experimental.macros
 import scala.annotation.StaticAnnotation
 import scala.annotation.compileTimeOnly
 
 @compileTimeOnly("Enable macro paradise to expand macro annotations.")
-class enum(args : Any*) extends StaticAnnotation {
+class enum extends StaticAnnotation {
    def macroTransform(annottees : Any*) = macro enum.impl
 }
 
@@ -15,20 +17,13 @@ object enum {
       import c.universe._
       import Flag._
 
-      def symbol(name : String)(tree : Tree) = tree match {
-         case Apply(
-            Select(Ident(TermName("scala")), TermName("Symbol")),
-            args) ⇒
-            args.exists {
-               case Literal(Constant(`name`)) ⇒ true
-               case _                         ⇒ false
-            }
-         case _ ⇒ false
+      def zipWithIndex[A](as : List[A]) : List[(Int, A)] = {
+         var i = -1
+         as.map { a ⇒
+            i = i + 1
+            i -> a
+         }
       }
-
-      val Apply(Select(New(Ident(TypeName("enum"))), termNames.CONSTRUCTOR), args) =
-         c.prefix.tree
-      val mkFromString = args.exists(symbol("fromString"))
 
       val (input : Tree, companion : Option[Tree]) = annottees match {
          case clazz :: obj :: Nil ⇒ (clazz.tree, Some(obj.tree))
@@ -47,42 +42,100 @@ object enum {
             val init = impl.body.find {
                case DefDef(_, name, _, _, _, _) if name.decoded == "<init>" ⇒ true
             }.get
-            val cases = impl.body.collect {
-               case Ident(name) ⇒
-                  val enumType = enumName.toTypeName
-                  q"""case object ${name.toTermName} extends $enumType"""
+
+            val cases : List[Name] = impl.body.collect {
+               case Ident(name) ⇒ name
             }
-            /*
-            val fromString =
-               if (mkFromString) {
-                  val cases = impl.body.collect {
-                     case Ident(name) ⇒
-                        q"""case `"${name.decodedName}"` ⇒ Some(${name.toTermName})"""
-                  }
-                  val baseCase = q"""case _ ⇒ None"""
-                  List(q"""def fromString(s : String) = s match {
-                     ${cases :+ baseCase}
-                  }""")
-               } else {
-                  Nil
+
+            val Enum = enumName.toTypeName
+
+            val caseObjects = cases.map { name ⇒
+               val enumType = enumName.toTypeName
+               q"""case object ${name.toTermName} extends $enumType"""
+            }
+
+            val asString = {
+               val caseDefs : List[CaseDef] = cases.map { name ⇒
+                  val lit = Literal(Constant(renderName(name)))
+                  cq"""`${name.toTermName}` ⇒ $lit"""
                }
-				 */
+
+               q"""protected def asStringImpl(e : $Enum) = e match {
+                  case ..$caseDefs
+               }"""
+            }
+
+            val fromString = {
+               val caseDefs : List[CaseDef] = cases.map { name ⇒
+                  val lit = Literal(Constant(renderName(name)))
+                  cq"""$lit ⇒ Some(${name.toTermName})"""
+               }
+
+               q"""protected def fromStringImpl(s : String) : Option[$Enum] = s match {
+                  case ..$caseDefs
+                  case _ ⇒ None
+               }"""
+            }
+
+            val indexedCases = zipWithIndex(cases)
+
+            val asInt = {
+               val caseDefs : List[CaseDef] = indexedCases map {
+                  case (i, name) ⇒ cq"`${name.toTermName}` ⇒ $i"
+               }
+
+               q"""protected def asIntImpl(e : $Enum) = e match {
+                  case ..$caseDefs
+               }"""
+            }
+
+            val fromInt = {
+               val caseDefs : List[CaseDef] = indexedCases map {
+                  case (i, name) ⇒ cq"$i ⇒ Some(${name.toTermName})"
+               }
+
+               q"""protected def fromIntImpl(i : Int) : Option[$Enum] = i match {
+                  case ..$caseDefs
+                  case _ ⇒ None
+               }"""
+            }
+
+            val first = q"protected def firstImpl : $Enum = ${cases.head.toTermName}"
+            val last = q"protected def lastImpl : $Enum = ${cases.last.toTermName}"
+
+            val apiImpl = List(
+               asString,
+               fromString,
+               asInt,
+               fromInt,
+               first,
+               last)
+
+            val enumApi = tq"macrame.EnumApi[$Enum]"
 
             val companionObj = companion match {
-               case Some(ModuleDef(mods, objName, objImpl)) ⇒ ModuleDef(
-                  mods,
-                  objName,
-                  Template(objImpl.parents, objImpl.self, cases ++ objImpl.body))
-               case None ⇒ ModuleDef(
-                  Modifiers(),
-                  enumName.toTermName,
-                  Template(impl.parents, impl.self, init :: cases))
+               case Some(ModuleDef(mods, objName, objImpl)) ⇒
+                  val newParents = enumApi :: (objImpl.parents.filter(_ == tq"scala.AnyRef"))
+                  ModuleDef(
+                     mods,
+                     objName,
+                     Template(
+                        newParents,
+                        objImpl.self,
+                        caseObjects ++ apiImpl ++ objImpl.body))
+               case None ⇒
+                  val newParents = enumApi :: (impl.parents.filter(_ == tq"scala.AnyRef"))
+                  ModuleDef(
+                     Modifiers(),
+                     enumName.toTermName,
+                     Template(newParents, impl.self, init :: caseObjects ++ apiImpl))
             }
             List(
                q"sealed abstract class ${enumName.toTypeName} extends Product with Serializable",
                companionObj)
          case _ ⇒ c.abort(NoPosition, "Enum must be a class.")
       }
+      // outputs.foreach(println)
       c.Expr[Any](Block(outputs, Literal(Constant(()))))
    }
 }
