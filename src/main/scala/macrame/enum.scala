@@ -13,9 +13,12 @@ class enum extends StaticAnnotation {
 }
 
 object enum {
+
    def impl(c : Context)(annottees : c.Expr[Any]*) : c.Expr[Any] = {
       import c.universe._
       import Flag._
+
+      case class Case(name : TermName, str : Tree)
 
       def zipWithIndex[A](as : List[A]) : List[(Int, A)] = {
          var i = -1
@@ -34,6 +37,7 @@ object enum {
          case ClassDef(mods, enumName, tparams, impl) ⇒
             impl.body.foreach {
                case Ident(_) ⇒
+               case Apply(Ident(_), _ :: Nil) ⇒
                case DefDef(_, name, _, _, _, _) if name.decoded == "<init>" ⇒
                case t ⇒
                   println(showRaw(t))
@@ -43,22 +47,20 @@ object enum {
                case DefDef(_, name, _, _, _, _) if name.decoded == "<init>" ⇒ true
             }.get
 
-            val cases : List[Name] = impl.body.collect {
-               case Ident(name) ⇒ name
+            val cases : List[Case] = impl.body.collect {
+               case Apply(Ident(name), str :: Nil) ⇒ Case(name.toTermName, str)
+               case Ident(name) ⇒
+                  Case(name.toTermName, Literal(Constant(renderName(name))))
             }
 
             val Enum = enumName.toTypeName
 
-            val caseObjects = cases.map { name ⇒
-               val enumType = enumName.toTypeName
-               q"""case object ${name.toTermName} extends $enumType"""
-            }
+            val caseObjects = cases.map(cse ⇒
+               q"""case object ${cse.name} extends $Enum""")
 
             val asString = {
-               val caseDefs : List[CaseDef] = cases.map { name ⇒
-                  val lit = Literal(Constant(renderName(name)))
-                  cq"""`${name.toTermName}` ⇒ $lit"""
-               }
+               val caseDefs : List[CaseDef] = cases.map(cse ⇒
+                  cq"""`${cse.name}` ⇒ ${cse.str}""")
 
                q"""protected def asStringImpl(e : $Enum) = e match {
                   case ..$caseDefs
@@ -66,9 +68,8 @@ object enum {
             }
 
             val fromString = {
-               val caseDefs : List[CaseDef] = cases.map { name ⇒
-                  val lit = Literal(Constant(renderName(name)))
-                  cq"""$lit ⇒ Some(${name.toTermName})"""
+               val caseDefs : List[CaseDef] = cases.map { cse ⇒
+                  cq"""`${cse.str}` ⇒ Some(${cse.name})"""
                }
 
                q"""protected def fromStringImpl(s : String) : Option[$Enum] = s match {
@@ -81,7 +82,7 @@ object enum {
 
             val asInt = {
                val caseDefs : List[CaseDef] = indexedCases map {
-                  case (i, name) ⇒ cq"`${name.toTermName}` ⇒ $i"
+                  case (i, cse) ⇒ cq"`${cse.name}` ⇒ $i"
                }
 
                q"""protected def asIntImpl(e : $Enum) = e match {
@@ -91,7 +92,7 @@ object enum {
 
             val fromInt = {
                val caseDefs : List[CaseDef] = indexedCases map {
-                  case (i, name) ⇒ cq"$i ⇒ Some(${name.toTermName})"
+                  case (i, cse) ⇒ cq"$i ⇒ Some(${cse.name})"
                }
 
                q"""protected def fromIntImpl(i : Int) : Option[$Enum] = i match {
@@ -100,8 +101,8 @@ object enum {
                }"""
             }
 
-            val first = q"protected def firstImpl : $Enum = ${cases.head.toTermName}"
-            val last = q"protected def lastImpl : $Enum = ${cases.last.toTermName}"
+            val first = q"protected def firstImpl : $Enum = ${cases.head.name}"
+            val last = q"protected def lastImpl : $Enum = ${cases.last.name}"
 
             val apiImpl = List(
                asString,
@@ -135,7 +136,7 @@ object enum {
                companionObj)
          case _ ⇒ c.abort(NoPosition, "Enum must be a class.")
       }
-      // outputs.foreach(println)
+      outputs.foreach(println)
       c.Expr[Any](Block(outputs, Literal(Constant(()))))
    }
 }
