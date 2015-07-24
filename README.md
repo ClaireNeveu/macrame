@@ -56,5 +56,5 @@ object Color {
 Via the `r` string interpolator, Macramé provides compile-time checked regular expressions. Interpolated variables are correctly escaped.
 ```scala
 val separator = "-"
-val PhoneNumber = r"\d{3}$separator\d{4}"
+val PhoneNumber = r"""\d{3}$separator\d{4}"""
 ```
