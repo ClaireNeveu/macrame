@@ -58,3 +58,24 @@ Via the `r` string interpolator, Macramé provides compile-time checked regular 
 val separator = "-"
 val PhoneNumber = r"""\d{3}$separator\d{4}"""
 ```
+## Selecting Members
+Often the key to good boilerplate-elimination, Macramé provides two functions to select members of objects: `members` and `membersMap`. When used inside the selected object, be sure to use type ascriptions otherwise these functions will try to contain themselves.
+```scala
+@enum class Color {
+   Red
+   Blue
+   Yellow
+}
+object Color {
+   val values : List[Color] = members[Color](this)
+}
+```
+## Debugging
+The `trace` macro can be very useful when figuring out why a macro won't work. It outputs to the console during compiliation. The format looks like this:
+```console
+[info] /home/chris/Programming/scala/macrame/README.scala:70: trace output
+[info]    immutable.this.List.apply[Color](this.Red, this.Blue, this.Yellow)
+[info] for position:
+[info]       val values : List[Color] = trace(members[Color](this))
+[info]                                        ^
+```
