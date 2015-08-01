@@ -1,8 +1,66 @@
 package macrame
 
+import org.scalatest.FunSuite
+
 import scala.math.Ordering
 
-class EnumTest {
+class EnumTest extends FunSuite {
+
+   test("Passing a non-String literal to a case should fail.") {
+      assertTypeError("""@enum class Color { Red(5) }""")
+   }
+
+   test("Passing a non-String value to a case should fail.") {
+      val foo = 5
+      assertTypeError("""@enum class Color { Red(foo) }""")
+   }
+
+   test("The simple case should work.") {
+      assertCompiles("""
+      @enum class Color {
+         Red
+         Blue
+         Yellow
+      }
+      """)
+   }
+
+   test("Overriding the string representation should work.") {
+      val yellowStr = "YELLOW"
+      @enum class Color {
+         Red
+         Blue("BLUE")
+         Yellow(yellowStr)
+      }
+      object Color {
+         val asString = asStringImpl _
+         val fromString = fromStringImpl _
+      }
+      assert(Color.asString(Color.Red) == "Red")
+      assert(Color.asString(Color.Blue) == "BLUE")
+      assert(Color.asString(Color.Yellow) == "YELLOW")
+      assert(Color.fromString("Red") == Some(Color.Red))
+      assert(Color.fromString("BLUE") == Some(Color.Blue))
+      assert(Color.fromString("YELLOW") == Some(Color.Yellow))
+   }
+
+   test("Int representations should work.") {
+      @enum class Color {
+         Red
+         Blue
+         Yellow
+      }
+      object Color {
+         val asInt = asIntImpl _
+         val fromInt = fromIntImpl _
+      }
+      assert(Color.asInt(Color.Red) == 0)
+      assert(Color.asInt(Color.Blue) == 1)
+      assert(Color.asInt(Color.Yellow) == 2)
+      assert(Color.fromInt(0) == Some(Color.Red))
+      assert(Color.fromInt(1) == Some(Color.Blue))
+      assert(Color.fromInt(2) == Some(Color.Yellow))
+   }
 
    val yellowStr = "YELLOW"
 
@@ -28,5 +86,7 @@ class EnumTest {
       val first : TrafficColor = firstImpl
       val last : TrafficColor = lastImpl
       implicit val ordering : Ordering[TrafficColor] = orderingImpl
+
+      val values : List[TrafficColor] = members[TrafficColor](this)
    }
 }

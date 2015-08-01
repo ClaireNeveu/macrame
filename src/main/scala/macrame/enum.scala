@@ -40,8 +40,8 @@ object enum {
                case Apply(Ident(_), _ :: Nil) ⇒
                case DefDef(_, name, _, _, _, _) if name.decoded == "<init>" ⇒
                case t ⇒
-                  println(showRaw(t))
-                  c.abort(t.pos, "An enum may only contain identifiers.")
+                  // println(showRaw(t))
+                  c.abort(t.pos, "Invalid case in Enum declaration.")
             }
             val init = impl.body.find {
                case DefDef(_, name, _, _, _, _) if name.decoded == "<init>" ⇒ true
@@ -136,7 +136,7 @@ object enum {
                companionObj)
          case _ ⇒ c.abort(NoPosition, "Enum must be a class.")
       }
-      outputs.foreach(println)
+      // outputs.foreach(println)
       c.Expr[Any](Block(outputs, Literal(Constant(()))))
    }
 }

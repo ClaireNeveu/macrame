@@ -12,9 +12,10 @@ object Build extends Build {
       "macrame",
       file("."),
       settings = commonSettings ++ Seq(
-         libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-compiler" % _),
+         libraryDependencies += "org.scala-lang" % "scala-compiler" % scalaVersion.value,
          libraryDependencies += compilerPlugin(
-            "org.scalamacros" % "paradise" % "2.1.0-M5" cross CrossVersion.full)
+            "org.scalamacros" % "paradise" % "2.1.0-M5" cross CrossVersion.full),
+         libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
       )
    )
 

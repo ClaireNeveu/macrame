@@ -10,8 +10,12 @@ package object macrame {
     */
    def trace[A](a : A) : A = macro Impl.trace[A]
 
+   /** A list of all members of type `T` in the given object. */
    def members[T](obj : Object) : List[T] = macro Impl.members[T]
 
+   /**
+    * A map of all members of type `T` in the given object, keyed by the name of the member.
+    */
    def memberMap[F](obj : Object) : Map[String, F] = macro Impl.memberMap[F]
 
    implicit class RegexStringContext(sc : StringContext) {
