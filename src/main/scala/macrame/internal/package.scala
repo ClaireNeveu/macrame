@@ -13,7 +13,7 @@ package object internal {
     * @param name The name of the method.
     * @param obj The object the method should belong to.
     */
-   def methodWithName(context : Context)(name : String, obj : context.Expr[Object]) = ???
+   // def methodWithName(context : Context)(name : String, obj : context.Expr[Object]) = ???
 
    /**
     * Converts a list of Expr into a single Expr of the form
