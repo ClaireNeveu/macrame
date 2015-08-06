@@ -44,7 +44,7 @@ object Build extends Build {
 
    lazy val commonSettings = Defaults.defaultSettings ++ scalariformSettings ++Seq(
       organization := "com.chrisneveu",
-      version      := "1.0.1",
+      version      := "1.0.2-SNAPSHOT",
       scalaVersion := "2.11.6",
       scalacOptions ++= Seq(
          "-unchecked",
