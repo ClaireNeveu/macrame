@@ -1,6 +1,14 @@
 # Macramé
 Macrame provides macro-base replacements for parts of the Scala standard library.
 
+## Getting Macramé
+If you're using SBT, add the following to your build file.
+```scala
+libraryDependencies ++= Seq(
+   "com.chrisneveu" %% "macrame" % "1.0.0",
+   compilerPlugin("org.scalamacros" % "paradise" % "2.1.0-M5" cross CrossVersion.full))
+```
+
 ## Enumerations
 Macramé provides an `@enum` macro annotation to replace Scala's `Enumeration` class. Unlike `Enumeration`, `@enum` classes are fully type-safe and provide exhaustiveness checks. `@enum` provides a much larger interface than `Enumeration` but it allows the user to select which functions to expose.
 
