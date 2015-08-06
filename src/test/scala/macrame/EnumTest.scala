@@ -6,6 +6,10 @@ import scala.math.Ordering
 
 class EnumTest extends FunSuite {
 
+   trait EnumExtenstion[A] { self : EnumApi[A] ⇒
+      def foo : A ⇒ String = a ⇒ asStringImpl(a)
+   }
+
    test("Passing a non-String literal to a case should fail.") {
       assertTypeError("""@enum class Color { Red(5) }""")
    }
@@ -60,6 +64,19 @@ class EnumTest extends FunSuite {
       assert(Color.fromInt(0) == Some(Color.Red))
       assert(Color.fromInt(1) == Some(Color.Blue))
       assert(Color.fromInt(2) == Some(Color.Yellow))
+   }
+
+   test("Traits should be able to extend EnumApi.") {
+      @enum class Color {
+         Red
+         Blue
+         Yellow
+      }
+      object Color extends EnumExtenstion[Color] {
+      }
+      assert(Color.foo(Color.Red) == "Red")
+      assert(Color.foo(Color.Blue) == "Blue")
+      assert(Color.foo(Color.Yellow) == "Yellow")
    }
 
    val yellowStr = "YELLOW"

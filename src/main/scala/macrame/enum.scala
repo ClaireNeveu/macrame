@@ -116,7 +116,10 @@ object enum {
 
             val companionObj = companion match {
                case Some(ModuleDef(mods, objName, objImpl)) ⇒
-                  val newParents = enumApi :: (objImpl.parents.filter(_ == tq"scala.AnyRef"))
+                  val newParents = enumApi :: (objImpl.parents.filter {
+                     case Select(Ident(TermName("scala")), TypeName("AnyRef")) ⇒ false
+                     case _ ⇒ true
+                  })
                   ModuleDef(
                      mods,
                      objName,
@@ -125,7 +128,10 @@ object enum {
                         objImpl.self,
                         caseObjects ++ apiImpl ++ objImpl.body))
                case None ⇒
-                  val newParents = enumApi :: (impl.parents.filter(_ == tq"scala.AnyRef"))
+                  val newParents = enumApi :: (impl.parents.filter {
+                     case Select(Ident(TermName("scala")), TypeName("AnyRef")) ⇒ false
+                     case _ ⇒ true
+                  })
                   ModuleDef(
                      Modifiers(),
                      enumName.toTermName,
