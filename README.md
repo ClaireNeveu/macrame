@@ -72,7 +72,7 @@ val separator = "-"
 val PhoneNumber = r"""\d{3}$separator\d{4}"""
 ```
 ## Selecting Members
-Often the key to good boilerplate-elimination, Macramé provides two functions to select members of objects: `members` and `membersMap`. When used inside the selected object, be sure to use type ascriptions otherwise these functions will try to contain themselves.
+Often the key to good boilerplate-elimination, Macramé provides two functions to select members of objects: `members` and `memberMap`. When used inside the selected object, be sure to use type ascriptions otherwise these functions will try to contain themselves.
 ```scala
 @enum class Color {
    Red
