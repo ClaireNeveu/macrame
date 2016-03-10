@@ -26,9 +26,9 @@ To understand how to use the `@enum` macro, we'll look at a simple `Color` enume
 // Expands to:
 sealed abstract class Color extends Product with Serializable
 object Color extends EnumApi[Color] {
-   case object Red
-   case object Blue
-   case object Yellow
+   case object Red extends Color
+   case object Blue extends Color
+   case object Yellow extends Color
    <EnumApi implementation elided>
 }
 ```
