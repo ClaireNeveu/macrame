@@ -6,7 +6,7 @@ import scala.math.Ordering
 
 class EnumTest extends FunSuite {
 
-   trait EnumExtenstion[A] { self : EnumApi[A] ⇒
+   trait EnumExtension[A] { self : EnumApi[A] ⇒
       def foo : A ⇒ String = a ⇒ asStringImpl(a)
    }
 
@@ -72,7 +72,7 @@ class EnumTest extends FunSuite {
          Blue
          Yellow
       }
-      object Color extends EnumExtenstion[Color] {
+      object Color extends EnumExtension[Color] {
       }
       assert(Color.foo(Color.Red) == "Red")
       assert(Color.foo(Color.Blue) == "Blue")
