@@ -71,6 +71,41 @@ Via the `r` string interpolator, Macramé provides compile-time checked regular 
 val separator = "-"
 val PhoneNumber = r"""\d{3}$separator\d{4}"""
 ```
+
+## Creating Delegates
+"delegate" or "proxy" classes are a powerful pattern for creating composable data types. Unfortunately programming this way forces you to write a lot of boilerplate, either writing accessors for each member of the wrapped type or adding an extra call (`wrapper.underlying.method`) whenever you need access to the wrapped type. The `@delegate` macro provides an easy solution to this problem allowing you to delegate method calls to a class parameter or member.
+```scala
+// In file User.scala
+case class User(name : String, password : String)
+// In file Admin.scala
+case class Admin(@delegate underlying : User, privileges : List[Board])
+abstract class Admin2 {
+  @delegate
+  def underlying : User
+  def privileges : List[Board]
+}
+// Expands to:
+case class User(name : String, password : String)
+case class Admin(underlying : User, privileges : List[Board]) {
+  def name : String = user.name
+  def password : String = user.password
+}
+abstract class Admin2 {
+  @delegate
+  def underlying : User
+  def privileges : List[Board]
+  def name : String = user.name
+  def password : String = user.password
+}
+```
+
+### Limitations
+Delegating to a class member currently has a number of limitations. Due to the way macro annotations currently work, it is impossible to detect naming collisions before expansion so these will result in compile errors. Additionally, the annotated member must have an explicit type ascription.
+
+These limitations do not exist when delegating to a class parameter. In that case any colliding names will not be delegated to. For this reason it is preferred that you use parameter delegation wherever possible.
+
+In both situations it is impossible to delegate to a type defined within the same immediate scope the enclosing class. This is unfortunately a limitation of macro annotations. To workaround this defined any types being delegated to in another file.
+
 ## Selecting Members
 Often the key to good boilerplate-elimination, Macramé provides two functions to select members of objects: `members` and `memberMap`. When used inside the selected object, be sure to use type ascriptions otherwise these functions will try to contain themselves.
 ```scala
