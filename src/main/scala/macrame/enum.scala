@@ -5,9 +5,7 @@ import macrame.internal.renderName
 import scala.reflect.macros.Context
 import scala.language.experimental.macros
 import scala.annotation.StaticAnnotation
-import scala.annotation.compileTimeOnly
 
-@compileTimeOnly("Enable macro paradise to expand macro annotations.")
 class enum extends StaticAnnotation {
    def macroTransform(annottees : Any*) = macro enum.impl
 }
@@ -117,7 +115,7 @@ object enum {
             val companionObj = companion match {
                case Some(ModuleDef(mods, objName, objImpl)) ⇒
                   val newParents = enumApi :: (objImpl.parents.filter {
-                     case Select(Ident(TermName("scala")), TypeName("AnyRef")) ⇒ false
+                     case Select(Ident(scala), anyRef) if scala.toString == "scala" && anyRef.toString == "AnyRef" ⇒ false
                      case _ ⇒ true
                   })
                   ModuleDef(
@@ -129,7 +127,7 @@ object enum {
                         caseObjects ++ apiImpl ++ objImpl.body))
                case None ⇒
                   val newParents = enumApi :: (impl.parents.filter {
-                     case Select(Ident(TermName("scala")), TypeName("AnyRef")) ⇒ false
+                     case Select(Ident(scala), anyRef) if scala.toString == "scala" && anyRef.toString == "AnyRef" ⇒ false
                      case _ ⇒ true
                   })
                   ModuleDef(

@@ -16,8 +16,14 @@ object Build extends Build {
       settings = commonSettings ++ Seq(
          libraryDependencies ++= Seq(
             "org.scala-lang" % "scala-compiler" % scalaVersion.value,
-            compilerPlugin("org.scalamacros" % "paradise" % "2.1.0-M5" cross CrossVersion.full),
-            "org.scalatest" %% "scalatest" % "2.2.4" % "test")
+            compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
+            "org.scalatest" %% "scalatest" % "2.2.4" % "test"),
+         libraryDependencies ++=
+            (CrossVersion.partialVersion(scalaVersion.value) match {
+               case Some((2, scalaMajor)) if scalaMajor >= 11 => Seq()
+               case Some((2, 10)) => Seq(
+                  "org.scalamacros" %% "quasiquotes" % "2.0.1")
+            })
       )
    )
 
@@ -45,7 +51,8 @@ object Build extends Build {
    lazy val commonSettings = Defaults.defaultSettings ++ scalariformSettings ++Seq(
       organization := "com.chrisneveu",
       version      := "1.1.0-SNAPSHOT",
-      scalaVersion := "2.11.6",
+      scalaVersion := "2.11.8",
+      crossScalaVersions := Seq("2.10.6", "2.11.8"),
       scalacOptions ++= Seq(
          "-unchecked",
          "-deprecation",

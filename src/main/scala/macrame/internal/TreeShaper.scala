@@ -1,6 +1,6 @@
 package macrame.internal
 
-import reflect.macros.blackbox.Context
+import reflect.macros.Context
 
 sealed abstract class TreeShaper[C <: Context] private (val c : C) { self ⇒
    import c.universe._

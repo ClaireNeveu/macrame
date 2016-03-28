@@ -5,9 +5,7 @@ import macrame.internal.renderName
 import scala.reflect.macros.Context
 import scala.language.experimental.macros
 import scala.annotation.StaticAnnotation
-import scala.annotation.compileTimeOnly
 
-@compileTimeOnly("Enable macro paradise to expand macro annotations.")
 class delegate extends StaticAnnotation {
    def macroTransform(annottees : Any*) = macro delegate.impl
 }
@@ -65,7 +63,7 @@ object delegate {
                   Modifiers(PARAM),
                   t.name.toTypeName,
                   List(),
-                  TypeBoundsTree(EmptyTree, EmptyTree)))
+                  TypeBoundsTree(tq"${c.typeOf[Nothing]}", tq"${c.typeOf[Any]}")))
             val passedTypeArgs = method.typeParams.map(t ⇒ Ident(t.name.toTypeName))
 
             val methodCall =
@@ -120,7 +118,7 @@ object delegate {
                case ValDef(_, name, _, _)       ⇒ List(name)
                case t                           ⇒ Nil
             }
-            val containerType = c.typecheck(q"""(throw new java.lang.Exception("")) : Object with ..${impl.parents}""").tpe
+            val containerType = c.typeCheck(q"""(throw new java.lang.Exception("")) : Object with ..${impl.parents}""").tpe
             val delegatedMembers = delegateType.members.filter(s ⇒
                !existingMembers.contains(s.name) &&
                   (containerType.member(s.name) == NoSymbol) &&
@@ -139,7 +137,7 @@ object delegate {
                         Modifiers(PARAM),
                         t.name.toTypeName,
                         List(),
-                        TypeBoundsTree(EmptyTree, EmptyTree)))
+                        TypeBoundsTree(tq"${c.typeOf[Nothing]}", tq"${c.typeOf[Any]}")))
                   val passedTypeArgs = method.typeParams.map(t ⇒ Ident(t.name.toTypeName))
 
                   val methodCall =
@@ -169,7 +167,7 @@ object delegate {
             ClassDef(mods, containerName, tparams, Template(impl.parents, impl.self, impl.body ++ delegatedMembers))
          case _ ⇒ c.abort(NoPosition, "Delegate must be a parameter or method of a class.")
       }
-      // println(output)
+      //println(output)
       c.Expr[Any](Block(output :: companion.toList, Literal(Constant(()))))
    }
 }
