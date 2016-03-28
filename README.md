@@ -6,7 +6,7 @@ If you're using SBT, add the following to your build file.
 ```scala
 libraryDependencies ++= Seq(
    "com.chrisneveu" %% "macrame" % "1.0.1",
-   compilerPlugin("org.scalamacros" % "paradise" % "2.1.0-M5" cross CrossVersion.full))
+   compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full))
 ```
 
 ## API Documentation
