@@ -125,12 +125,18 @@ object delegate {
                   (s.name.decoded != "<init>")
             ).collect {
                case method : MethodSymbol ⇒
-                  val arguments = method.paramss.map(_.map(p ⇒
+                  val arguments = method.paramss.map(_.map { p ⇒
+                     val typeSignature = p.typeSignature match {
+                        case TypeRef(NoPrefix, t, Nil) ⇒
+                           Ident(p.typeSignature.typeSymbol.name.toTypeName)
+                        case _ ⇒ tq"${p.typeSignature}"
+                     }
                      ValDef(
                         Modifiers(PARAM),
                         p.name.toTermName,
-                        Ident(p.typeSignature.typeSymbol.name.toTypeName),
-                        EmptyTree)))
+                        typeSignature,
+                        EmptyTree)
+                  })
                   val methodName = method.name.toTermName
                   val typeArgs = method.typeParams.map(t ⇒
                      TypeDef(

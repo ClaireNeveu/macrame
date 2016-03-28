@@ -71,4 +71,26 @@ class DelegateTest extends FunSuite {
       assert((five2 + 1) == 6)
       assert((five3 + 1) == 6)
    }
+
+   final class Body(display : Option[String] = None) {
+
+      def newBody(newDisplay : Option[String]) = new Body(newDisplay)
+
+      def extractUrls() : List[String] =
+         for {
+            document ← display.toList
+         } yield document
+   }
+
+   test("Delegated methods should handle parameterized types.") {
+      final case class PostContent(
+            headline : Option[String] = None,
+            @delegate body : Body = new Body(),
+            source : Option[String] = Some("WYSIWYG"),
+            images : List[String] = List[String](),
+            videos : List[String] = List[String](),
+            videoThumbs : List[String] = List[String]()) {
+         def extractUrls() : List[String] = videos
+      }
+   }
 }
