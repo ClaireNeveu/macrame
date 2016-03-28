@@ -91,7 +91,6 @@ case class Admin(underlying : User, privileges : List[Board]) {
   def password : String = user.password
 }
 abstract class Admin2 {
-  @delegate
   def underlying : User
   def privileges : List[Board]
   def name : String = user.name
