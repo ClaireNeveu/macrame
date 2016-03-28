@@ -87,14 +87,14 @@ abstract class Admin2 {
 // Expands to:
 case class User(name : String, password : String)
 case class Admin(underlying : User, privileges : List[Board]) {
-  def name : String = user.name
-  def password : String = user.password
+  def name : String = underlying.name
+  def password : String = underlying.password
 }
 abstract class Admin2 {
   def underlying : User
   def privileges : List[Board]
-  def name : String = user.name
-  def password : String = user.password
+  def name : String = underlying.name
+  def password : String = underlying.password
 }
 ```
 
