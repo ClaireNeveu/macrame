@@ -93,4 +93,16 @@ class DelegateTest extends FunSuite {
          def extractUrls() : List[String] = videos
       }
    }
+
+   class Foo2 { def identity[A[_], B](a : A[B]) : A[B] = a }
+   test("Delegated methods should handle higher kinded types.") {
+      class Bar1(@delegate foo : Foo2)
+      abstract class Bar2 { @delegate val foo : Foo2 }
+      abstract class Bar3 { @delegate def foo : Foo2 }
+      assertCompiles("""
+      val bar1 = (new Bar1(new Foo)).identity[Int](5)
+      val bar2 = (new Bar2 { val foo = new Foo2 }).identity[Option, Int](Option(5))
+      val bar3 = (new Bar3 { def foo = new Foo2 }).identity[Option, Int](Option(5))
+      """)
+   }
 }
