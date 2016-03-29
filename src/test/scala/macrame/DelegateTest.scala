@@ -82,7 +82,8 @@ class DelegateTest extends FunSuite {
          } yield document
    }
 
-   test("Delegated methods should handle parameterized types.") {
+   test("Delegated parameters should handle parameterized types.") {
+      assertCompiles("""
       final case class PostContent(
             headline : Option[String] = None,
             @delegate body : Body = new Body(),
@@ -92,5 +93,26 @@ class DelegateTest extends FunSuite {
             videoThumbs : List[String] = List[String]()) {
          def extractUrls() : List[String] = videos
       }
+      """)
+   }
+
+   case class CaseOne(foo : String, bar : Int, baz : Long)
+   test("Delegated parameters should not clobber copy methods.") {
+      case class CaseTwo(@delegate one : CaseOne, alpha : Boolean)
+      class NonCase(@delegate one : CaseOne, alpha : Boolean)
+      val a = CaseOne("a", 1, 2l)
+      val b = CaseOne("b", 3, 4l)
+      val c = CaseTwo(a, true)
+      val d = CaseTwo(b, true)
+      val n1 = new NonCase(a, true)
+      assert(c.copy(one = b) == d)
+      assertTypeError("""n1.copy""")
+   }
+
+   test("Delegated members should not clobber copy methods.") {
+      abstract class NonCase { @delegate val one : CaseOne; val alpha : Boolean }
+      val a = CaseOne("a", 1, 2l)
+      val n1 = new NonCase { val one = a; val alpha = true }
+      assertTypeError("""n1.copy()""")
    }
 }

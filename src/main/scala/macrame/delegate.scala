@@ -48,7 +48,8 @@ object delegate {
 
       val delegatedMembers : List[Tree] = delegateType.members.filter(s ⇒
          (containerType.member(s.name) == NoSymbol) &&
-            (s.name.decoded != "<init>")
+            (s.name.decoded != "<init>") &&
+            !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decoded == "copy")
       ).collect {
          case method : MethodSymbol ⇒
             val arguments = method.paramss.map(_.map(p ⇒
@@ -122,7 +123,8 @@ object delegate {
             val delegatedMembers = delegateType.members.filter(s ⇒
                !existingMembers.contains(s.name) &&
                   (containerType.member(s.name) == NoSymbol) &&
-                  (s.name.decoded != "<init>")
+                  (s.name.decoded != "<init>") &&
+                  !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decoded == "copy")
             ).collect {
                case method : MethodSymbol ⇒
                   val arguments = method.paramss.map(_.map { p ⇒
@@ -173,7 +175,7 @@ object delegate {
             ClassDef(mods, containerName, tparams, Template(impl.parents, impl.self, impl.body ++ delegatedMembers))
          case _ ⇒ c.abort(NoPosition, "Delegate must be a parameter or method of a class.")
       }
-      //println(output)
+      // println(output)
       c.Expr[Any](Block(output :: companion.toList, Literal(Constant(()))))
    }
 }
