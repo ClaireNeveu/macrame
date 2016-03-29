@@ -5,7 +5,7 @@ Macrame provides macro-base replacements for parts of the Scala standard library
 If you're using SBT, add the following to your build file.
 ```scala
 libraryDependencies ++= Seq(
-   "com.chrisneveu" %% "macrame" % "1.1.1",
+   "com.chrisneveu" %% "macrame" % "1.1.2",
    compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full))
 ```
 
