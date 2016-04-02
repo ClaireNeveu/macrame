@@ -102,13 +102,23 @@ object enum {
             val first = q"protected def firstImpl : $Enum = ${cases.head.name}"
             val last = q"protected def lastImpl : $Enum = ${cases.last.name}"
 
+            val values = q"""
+               protected val valuesImpl : Set[$Enum] = Set(..${cases.map(_.name)})
+            """
+
+            val className = q"""
+               protected val className : String = ${Enum.decoded.toString}
+            """
+
             val apiImpl = List(
                asString,
                fromString,
                asInt,
                fromInt,
                first,
-               last)
+               last,
+               values,
+               className)
 
             val enumApi = tq"macrame.EnumApi[$Enum]"
 

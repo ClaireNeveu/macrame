@@ -79,6 +79,30 @@ class EnumTest extends FunSuite {
       assert(Color.foo(Color.Yellow) == "Yellow")
    }
 
+   test("values should be correct.") {
+      @enum class Color {
+         Red
+         Blue
+         Yellow
+      }
+      object Color {
+         val values = valuesImpl
+      }
+      assert(Color.values == Set(Color.Red, Color.Blue, Color.Yellow))
+   }
+
+   test("className should be correct.") {
+      @enum class Color {
+         Red
+         Blue
+         Yellow
+      }
+      object Color {
+         val name = className
+      }
+      assert(Color.name == "Color")
+   }
+
    val yellowStr = "YELLOW"
 
    @enum class TrafficColor {

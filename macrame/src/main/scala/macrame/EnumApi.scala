@@ -68,4 +68,13 @@ trait EnumApi[Enum] {
 
    /** An instance of `Ordering` based on the definition order of the cases. */
    protected def orderingImpl : Ordering[Enum] = Ordering.by(asShortImpl)
+
+   /** The full set of enumeration values. */
+   protected def valuesImpl : Set[Enum]
+
+   /**
+    * Provides the class name of the enumeration.
+    * This is useful for traits that build on top of `EnumApi`.
+    */
+   protected def className : String
 }
