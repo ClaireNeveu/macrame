@@ -1,5 +1,5 @@
 # Macramé
-Macrame provides macro-base replacements for parts of the Scala standard library.
+Macrame provides macro-based replacements for parts of the Scala standard library.
 
 ## Getting Macramé
 If you're using SBT, add the following to your build file.
