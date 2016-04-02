@@ -14,6 +14,7 @@ object Build extends Build {
       "macrame",
       file("macrame"),
       settings = commonSettings ++ Seq(
+         version := "1.1.3-SNAPSHOT",
          libraryDependencies ++= Seq(
             "org.scala-lang" % "scala-compiler" % scalaVersion.value,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
@@ -23,9 +24,17 @@ object Build extends Build {
                case Some((2, scalaMajor)) if scalaMajor >= 11 => Seq()
                case Some((2, 10)) => Seq(
                   "org.scalamacros" %% "quasiquotes" % "2.0.1")
-            })
-      )
-   )
+            })))
+
+   lazy val macramePlay: Project = Project(
+      "macrame-play",
+      file("macrame-play"),
+      settings = commonSettings ++ Seq(
+         version := "1.0.0-play-2.5.x-SNAPSHOT",
+         libraryDependencies ++= Seq(
+				"com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
+				"com.typesafe.play" %% "play-json" % "[2.5,2.6[" % Provided,
+            "org.scalatest" %% "scalatest" % "2.2.4" % "test")))
 
    lazy val pomStuff = {
      <url>https://github.com/ChrisNeveu/macrame</url>
@@ -50,7 +59,6 @@ object Build extends Build {
 
    lazy val commonSettings = Defaults.defaultSettings ++ scalariformSettings ++Seq(
       organization := "com.chrisneveu",
-      version      := "1.1.2-SNAPSHOT",
       scalaVersion := "2.11.8",
       crossScalaVersions := Seq("2.10.6", "2.11.8"),
       scalacOptions ++= Seq(
