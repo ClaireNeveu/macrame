@@ -12,7 +12,7 @@ object Build extends Build {
 
    lazy val root: Project = Project(
       "macrame",
-      file("."),
+      file("macrame"),
       settings = commonSettings ++ Seq(
          libraryDependencies ++= Seq(
             "org.scala-lang" % "scala-compiler" % scalaVersion.value,
