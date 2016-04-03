@@ -321,4 +321,6 @@ trait OrderedModular[Enum] extends Ordered[Enum] { self : EnumApi[Enum] ⇒
  * that you use a smaller subset of these functions as provided by the other traits
  * in the `macrame.enums` namespace.
  */
-trait All[Enum] extends NumericConverters[Enum] with OrderedModular[Enum] { self : EnumApi[Enum] ⇒ }
+trait All[Enum] extends NumericConverters[Enum] with OrderedModular[Enum] { self : EnumApi[Enum] ⇒ 
+   @inline def values : Set[Enum] = valuesImpl
+}
