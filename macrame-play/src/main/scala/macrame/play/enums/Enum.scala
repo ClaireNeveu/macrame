@@ -62,7 +62,7 @@ trait FromJson[Enum] { self : EnumApi[Enum] ⇒
             def reads(js : JsValue) : JsResult[Enum] = {
                val in = js.asOpt[String].map(_.toLowerCase)
                valuesImpl.map(v ⇒ asStringImpl(v).toLowerCase -> v)
-                  .find(v ⇒ in.contains(v._1))
+                  .find(v ⇒ in.exists(_ == v._1))
                   .fold[JsResult[Enum]](JsError(s"Expected $className but found: $js"))(e ⇒ JsSuccess(e._2))
             }
          }
