@@ -14,7 +14,7 @@ object Build extends Build {
       "macrame",
       file("macrame"),
       settings = commonSettings ++ Seq(
-         version := "1.2.1-SNAPSHOT",
+         version := "1.2.1",
          libraryDependencies ++= Seq(
             "org.scala-lang" % "scala-compiler" % scalaVersion.value,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
@@ -32,8 +32,8 @@ object Build extends Build {
       settings = commonSettings ++ Seq(
          version := "1.0.3-play-2.5.x-SNAPSHOT",
          libraryDependencies ++= Seq(
-				"com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
-				"com.typesafe.play" %% "play-json" % "[2.5,2.6[" % Provided,
+            "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
+            "com.typesafe.play" %% "play-json" % "[2.5,2.6[" % Provided,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
             "org.scalatest" %% "scalatest" % "2.2.4" % "test")))
 
