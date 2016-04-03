@@ -271,7 +271,7 @@ trait NumericConverters[Enum] extends LongConverters[Enum] with ShortConverters[
  * }}}
  */
 trait Ordered[Enum] { self : EnumApi[Enum] ⇒
-   @inline val ordering : Ordering[Enum] = orderingImpl
+   @inline implicit val ordering : Ordering[Enum] = orderingImpl
    @inline def next(enum : Enum) : Option[Enum] = nextImpl(enum)
    @inline def prev(enum : Enum) : Option[Enum] = prevImpl(enum)
    @inline def first : Enum = firstImpl
