@@ -319,6 +319,6 @@ trait OrderedModular[Enum] extends Ordered[Enum] { self : EnumApi[Enum] ⇒
  * This traits provides *all* of the auto-generated functions in `EnumApi`.
  * It is rare that one actually needs all such functions and it is recommended
  * that you use a smaller subset of these functions as provided by the other traits
- * in the `macrame.enumeration` namespace.
+ * in the `macrame.enums` namespace.
  */
 trait All[Enum] extends NumericConverters[Enum] with OrderedModular[Enum] { self : EnumApi[Enum] ⇒ }
