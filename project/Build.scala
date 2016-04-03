@@ -30,7 +30,7 @@ object Build extends Build {
       "macrame-play",
       file("macrame-play"),
       settings = commonSettings ++ Seq(
-         version := "1.0.2-play-2.5.x",
+         version := "1.0.3-play-2.5.x-SNAPSHOT",
          libraryDependencies ++= Seq(
 				"com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
 				"com.typesafe.play" %% "play-json" % "[2.5,2.6[" % Provided,
