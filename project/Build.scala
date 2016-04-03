@@ -30,10 +30,10 @@ object Build extends Build {
       "macrame-play",
       file("macrame-play"),
       settings = commonSettings ++ Seq(
-         version := "1.0.0-play-2.5.x",
+         version := "1.0.0-play-2.4.x",
          libraryDependencies ++= Seq(
 				"com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
-				"com.typesafe.play" %% "play-json" % "[2.5,2.6[" % Provided,
+				"com.typesafe.play" %% "play-json" % "[2.4,2.5[" % Provided,
             "org.scalatest" %% "scalatest" % "2.2.4" % "test")))
 
    lazy val pomStuff = {
