@@ -10,11 +10,11 @@ import com.typesafe.sbt.pgp.PgpSettings.useGpg
 
 object Build extends Build {
 
-   lazy val root: Project = Project(
+   lazy val macrame: Project = Project(
       "macrame",
       file("macrame"),
       settings = commonSettings ++ Seq(
-         version := "1.2.0",
+         version := "1.2.1-SNAPSHOT",
          libraryDependencies ++= Seq(
             "org.scala-lang" % "scala-compiler" % scalaVersion.value,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
