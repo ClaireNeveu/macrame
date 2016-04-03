@@ -34,6 +34,7 @@ object Build extends Build {
          libraryDependencies ++= Seq(
 				"com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
 				"com.typesafe.play" %% "play-json" % "[2.5,2.6[" % Provided,
+            compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
             "org.scalatest" %% "scalatest" % "2.2.4" % "test")))
 
    lazy val pomStuff = {
