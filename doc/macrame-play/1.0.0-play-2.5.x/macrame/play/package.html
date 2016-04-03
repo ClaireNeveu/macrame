@@ -1,0 +1,170 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>play - macrame.play</title>
+          <meta name="description" content="play - macrame.play" />
+          <meta name="keywords" content="play macrame.play" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'macrame.play.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="macrame">macrame</a></p>
+        <h1>play</h1><span class="permalink">
+      <a href="../../index.html#macrame.play.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">play</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="macrame.play.AsJson" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="AsJson[Enum]extendsAnyRef"></a>
+      <a id="AsJson[Enum]:AsJson[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AsJson.html"><span class="name">AsJson</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.play.package@AsJson[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides an instance of <code>Writes</code> for an enumeration.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides an instance of <code>Writes</code> for an enumeration. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> AsJson[Color]</pre></div></div>
+    </li><li name="macrame.play.FromJson" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="FromJson[Enum]extendsAnyRef"></a>
+      <a id="FromJson[Enum]:FromJson[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="FromJson.html"><span class="name">FromJson</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.play.package@FromJson[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides an instance of <code>Reads</code> for an enumeration.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides an instance of <code>Reads</code> for an enumeration. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> FromJson[Color]</pre></div></div>
+    </li><li name="macrame.play.JsonConverters" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="JsonConverters[Enum]extendsAsJson[Enum]withFromJson[Enum]"></a>
+      <a id="JsonConverters[Enum]:JsonConverters[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="JsonConverters.html"><span class="name">JsonConverters</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <a href="AsJson.html" class="extype" name="macrame.play.AsJson">AsJson</a>[<span class="extype" name="macrame.play.JsonConverters.Enum">Enum</span>] with <a href="FromJson.html" class="extype" name="macrame.play.FromJson">FromJson</a>[<span class="extype" name="macrame.play.JsonConverters.Enum">Enum</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.play.package@JsonConverters[Enum]extendsAsJson[Enum]withFromJson[Enum]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides an instance of <code>Format</code> for an enumeration.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides an instance of <code>Format</code> for an enumeration. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> JsonConverters[Color]</pre></div></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
