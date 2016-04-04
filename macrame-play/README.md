@@ -13,7 +13,7 @@ Full API documentation is available [here](http://chrisneveu.github.io/macrame/d
 ### Usage
 This example shows how to make a `Format` instance for a `Color` enumeration:
 ```scala
-import macrame.play.JsonConverters
+import macrame.play.enums.JsonConverters
 
 @enum class Color {
    Red
