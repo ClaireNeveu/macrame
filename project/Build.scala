@@ -37,6 +37,18 @@ object Build extends Build {
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
             "org.scalatest" %% "scalatest" % "2.2.4" % "test")))
 
+   lazy val macrameScalaz: Project = Project(
+      "macrame-scalaz",
+      file("macrame-scalaz"),
+      settings = commonSettings ++ Seq(
+         version := "1.0.0-scalaz-7.0.x-SNAPSHOT",
+         libraryDependencies ++= Seq(
+            "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
+            "org.scalaz" %% "scalaz-core" % "[7.2,7.3[" % Provided,
+            compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
+            "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+            "org.scalacheck" %% "scalacheck" % "1.12.5" % "test")))
+
    lazy val pomStuff = {
      <url>https://github.com/ChrisNeveu/macrame</url>
      <licenses>
