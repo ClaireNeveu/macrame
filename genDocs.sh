@@ -1,26 +1,25 @@
 #! /usr/bin/bash
 
-MACRAME_VERSION=$1
-MACRAME_PLAY_VERSION=$2
+PROJECT_NAME=$1
+PROJECT_VERSION=$2
 
-sbt "macrame/doc"
-sbt "macrame-play/doc"
-rm -rf /tmp/macrame/$MACRAME_VERSION/
-rm -rf /tmp/macrame-play/$MACRAME_PLAY_VERSION/
-mkdir -p /tmp/macrame/$MACRAME_VERSION/
-mkdir -p /tmp/macrame-play/$MACRAME_PLAY_VERSION/
-cp -r macrame/target/scala-2.11/api/* /tmp/macrame/$MACRAME_VERSION/
-cp -r macrame-play/target/scala-2.11/api/* /tmp/macrame-play/$MACRAME_PLAY_VERSION/
+if [[ ! $PROJECT_NAME ]] || [[ ! $PROJECT_VERSION ]]
+then
+    exit 1
+fi
+
+sbt "$PROJECT_NAME/doc"
+rm -rf /tmp/$PROJECT_NAME/$PROJECT_VERSION/
+mkdir -p /tmp/$PROJECT_NAME/$PROJECT_VERSION/
+cp -r $PROJECT_NAME/target/scala-2.11/api/* /tmp/$PROJECT_NAME/$PROJECT_VERSION/
 
 git checkout gh-pages
 
-mkdir -p ./doc/macrame/$MACRAME_VERSION/
-mkdir -p ./doc/macrame-play/$MACRAME_PLAY_VERSION/
-cp -r /tmp/macrame/$MACRAME_VERSION/ ./doc/macrame/
-cp -r /tmp/macrame-play/$MACRAME_PLAY_VERSION/ ./doc/macrame-play/
+mkdir -p ./doc/$PROJECT_NAME/$PROJECT_VERSION/
+cp -r /tmp/$PROJECT_NAME/$PROJECT_VERSION/ ./doc/$PROJECT_NAME/
 
 git add -A
-git commit -m 'Update Scaladoc.'
+git commit -m "Add Scaladoc for $PROJECT_NAME $PROJECT_VERSION."
 git push
 
 git checkout master
