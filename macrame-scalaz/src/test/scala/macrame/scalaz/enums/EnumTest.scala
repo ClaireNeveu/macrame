@@ -38,7 +38,6 @@ class EnumTest extends FunSuite with PropertyChecks {
          assert(Mod5.order.orderLaw.naturality(a, b))
          assert(Mod5.order.orderLaw.reflexive(a))
          assert(Mod5.order.orderLaw.transitive(a, b, c))
-         assert(Mod5.order.orderLaw.antisymmetric(a, b))
          assert(Mod5.order.orderLaw.orderAndEqualConsistent(a, b))
          assert(Mod5.order.orderLaw.transitiveOrder(a, b, c))
       }
@@ -64,7 +63,6 @@ class EnumTest extends FunSuite with PropertyChecks {
       forAll { (a : Mod5, b : Mod5) ⇒
          assert(Mod5.enum.enumLaw.commutative(a, b))
          assert(Mod5.enum.enumLaw.naturality(a, b))
-         assert(Mod5.enum.enumLaw.antisymmetric(a, b))
          assert(Mod5.enum.enumLaw.orderAndEqualConsistent(a, b))
       }
       forAll { (a : Mod5, b : Mod5, c : Mod5) ⇒
