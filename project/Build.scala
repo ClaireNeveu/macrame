@@ -41,10 +41,10 @@ object Build extends Build {
       "macrame-scalaz",
       file("macrame-scalaz"),
       settings = commonSettings ++ Seq(
-         version := "1.0.1-scalaz-7.2.x-SNAPSHOT",
+         version := "1.0.0-scalaz-7.1.x",
          libraryDependencies ++= Seq(
             "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
-            "org.scalaz" %% "scalaz-core" % "[7.2,7.3[" % Provided,
+            "org.scalaz" %% "scalaz-core" % "[7.1,7.2[" % Provided,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
             "org.scalatest" %% "scalatest" % "2.2.4" % "test",
             "org.scalacheck" %% "scalacheck" % "1.12.5" % "test")))
