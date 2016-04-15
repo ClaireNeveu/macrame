@@ -41,7 +41,7 @@ object Build extends Build {
       "macrame-scalaz",
       file("macrame-scalaz"),
       settings = commonSettings ++ Seq(
-         version := "1.0.0-scalaz-7.0.x-SNAPSHOT",
+         version := "1.0.0-scalaz-7.2.x",
          libraryDependencies ++= Seq(
             "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
             "org.scalaz" %% "scalaz-core" % "[7.2,7.3[" % Provided,
