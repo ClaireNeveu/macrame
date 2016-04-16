@@ -5,6 +5,8 @@ import macrame.EnumApi
 import play.api.libs.json._
 import play.api.mvc.{ PathBindable, QueryStringBindable }
 
+import scala.util.Try
+
 /**
  * This trait provides an instance of `Writes` for an enumeration. It works
  * by extending the companion object of the enumeration class.
@@ -168,6 +170,35 @@ trait QueryStringConverters[Enum] { self : EnumApi[Enum] ⇒
 }
 
 /**
+ * This trait provides an instance of `QueryStringBindable` for an enumeration.
+ * Unlike `QueryStringConverters`, the `QueryStringBindable` instance created by
+ * this trait treats the input as a number using the `Int` representation of the
+ * enumeration. It works by extending the companion object of the enumeration class.
+ * {{{
+ * @enum class Digit {
+ *   Zero
+ *   One
+ *   Two
+ *   Three
+ *   Four
+ *   Five
+ *   Six
+ *   Seven
+ *   Eight
+ *   Nine
+ * }
+ * object Digit extends QueryStringNumericConverters[Digit]
+ * }}}
+ */
+trait QueryStringNumericConverters[Enum] { self : EnumApi[Enum] ⇒
+   implicit lazy val queryStringBindable : QueryStringBindable[Enum] =
+      new QueryStringBindable.Parsing(
+         s ⇒ Try(fromIntImpl(s.toInt)).toOption.flatten.getOrElse(throw new Exception(s)),
+         asIntImpl(_).toString,
+         (key, e) ⇒ s"""Expected $className but found "${e.getMessage}" for key "$key".""")
+}
+
+/**
  * This trait provides an instance of `PathBindable` for an enumeration.
  * It works by extending the companion object of the enumeration class.
  * {{{
@@ -207,4 +238,33 @@ trait PathConverters[Enum] { self : EnumApi[Enum] ⇒
                .fold[Enum](throw new Exception(s))(_._2),
             asStringImpl(_),
             (key, e) ⇒ s"""Expected $className but found "${e.getMessage}" for key "$key".""")
+}
+
+/**
+ * This trait provides an instance of `PathBindable` for an enumeration.
+ * Unlike `PathConverters`, the `PathBindable` instance created by
+ * this trait treats the input as a number using the `Int` representation of the
+ * enumeration. It works by extending the companion object of the enumeration class.
+ * {{{
+ * @enum class Digit {
+ *   Zero
+ *   One
+ *   Two
+ *   Three
+ *   Four
+ *   Five
+ *   Six
+ *   Seven
+ *   Eight
+ *   Nine
+ * }
+ * object Digit extends PathNumericConverters[Digit]
+ * }}}
+ */
+trait PathNumericConverters[Enum] { self : EnumApi[Enum] ⇒
+   implicit lazy val queryStringBindable : PathBindable[Enum] =
+      new PathBindable.Parsing(
+         s ⇒ Try(fromIntImpl(s.toInt)).toOption.flatten.getOrElse(throw new Exception(s)),
+         asIntImpl(_).toString,
+         (key, e) ⇒ s"""Expected $className but found "${e.getMessage}" for key "$key".""")
 }
