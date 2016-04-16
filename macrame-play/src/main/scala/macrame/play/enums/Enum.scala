@@ -157,14 +157,14 @@ trait QueryStringConverters[Enum] { self : EnumApi[Enum] ⇒
    implicit lazy val queryStringBindable : QueryStringBindable[Enum] =
       if (caseSensitive)
          new QueryStringBindable.Parsing(
-            s ⇒ fromStringImpl(s).getOrElse(throw new Exception(s)),
+            s ⇒ fromStringImpl(s).getOrElse(throwException(s)),
             asStringImpl(_),
             (key, e) ⇒ s"""Expected $className but found "${e.getMessage}" for key "$key".""")
       else
          new QueryStringBindable.Parsing(
             s ⇒ valuesImpl.map(v ⇒ asStringImpl(v).toLowerCase -> v)
                .find(v ⇒ s.toLowerCase == v._1)
-               .fold[Enum](throw new Exception(s))(_._2),
+               .fold[Enum](throwException(s))(_._2),
             asStringImpl(_),
             (key, e) ⇒ s"""Expected $className but found "${e.getMessage}" for key "$key".""")
 }
@@ -193,7 +193,7 @@ trait QueryStringConverters[Enum] { self : EnumApi[Enum] ⇒
 trait QueryStringNumericConverters[Enum] { self : EnumApi[Enum] ⇒
    implicit lazy val queryStringBindable : QueryStringBindable[Enum] =
       new QueryStringBindable.Parsing(
-         s ⇒ Try(fromIntImpl(s.toInt)).toOption.flatten.getOrElse(throw new Exception(s)),
+         s ⇒ Try(fromIntImpl(s.toInt)).toOption.flatten.getOrElse(throwException(s)),
          asIntImpl(_).toString,
          (key, e) ⇒ s"""Expected $className but found "${e.getMessage}" for key "$key".""")
 }
@@ -228,14 +228,14 @@ trait PathConverters[Enum] { self : EnumApi[Enum] ⇒
    implicit lazy val pathBindable : PathBindable[Enum] =
       if (caseSensitive)
          new PathBindable.Parsing(
-            s ⇒ fromStringImpl(s).getOrElse(throw new Exception(s)),
+            s ⇒ fromStringImpl(s).getOrElse(throwException(s)),
             asStringImpl(_),
             (key, e) ⇒ s"""Expected $className but found "${e.getMessage}" for key "$key".""")
       else
          new PathBindable.Parsing(
             s ⇒ valuesImpl.map(v ⇒ asStringImpl(v).toLowerCase -> v)
                .find(v ⇒ s.toLowerCase == v._1)
-               .fold[Enum](throw new Exception(s))(_._2),
+               .fold[Enum](throwException(s))(_._2),
             asStringImpl(_),
             (key, e) ⇒ s"""Expected $className but found "${e.getMessage}" for key "$key".""")
 }
@@ -264,7 +264,7 @@ trait PathConverters[Enum] { self : EnumApi[Enum] ⇒
 trait PathNumericConverters[Enum] { self : EnumApi[Enum] ⇒
    implicit lazy val queryStringBindable : PathBindable[Enum] =
       new PathBindable.Parsing(
-         s ⇒ Try(fromIntImpl(s.toInt)).toOption.flatten.getOrElse(throw new Exception(s)),
+         s ⇒ Try(fromIntImpl(s.toInt)).toOption.flatten.getOrElse(throwException(s)),
          asIntImpl(_).toString,
          (key, e) ⇒ s"""Expected $className but found "${e.getMessage}" for key "$key".""")
 }
