@@ -103,11 +103,11 @@ object enum {
             val last = q"protected def lastImpl : $Enum = ${cases.last.name}"
 
             val values = q"""
-               protected val valuesImpl : Set[$Enum] = Set(..${cases.map(_.name)})
+               protected lazy val valuesImpl : Set[$Enum] = Set(..${cases.map(_.name)})
             """
 
             val className = q"""
-               protected val className : String = ${Enum.decoded.toString}
+               protected lazy val className : String = ${Enum.decoded.toString}
             """
 
             val apiImpl = List(
