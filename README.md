@@ -5,12 +5,12 @@ Macrame provides macro-based replacements for parts of the Scala standard librar
 If you're using SBT, add the following to your build file.
 ```scala
 libraryDependencies ++= Seq(
-   "com.chrisneveu" %% "macrame" % "1.2.1",
+   "com.chrisneveu" %% "macrame" % "1.2.2",
    compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full))
 ```
 
 ## API Documentation
-Full API documentation is available [here](http://chrisneveu.github.io/macrame/doc/macrame/1.2.1/#package).
+Full API documentation is available [here](http://chrisneveu.github.io/macrame/doc/macrame/1.2.2/#package).
 
 ## Enumerations
 Macramé provides an `@enum` macro annotation to replace Scala's `Enumeration` class. Unlike `Enumeration`, `@enum` classes are fully type-safe and provide exhaustiveness checks. `@enum` provides a much larger interface than `Enumeration` but it allows the user to select which functions to expose.
@@ -36,7 +36,7 @@ object Color extends EnumApi[Color] {
 ### Using EnumApi
 In order to reduce boilerplate, the `@enum` macro defines a number of convenient functions on your enumeration type. Auto-generated functions are great but they often increase your API in undesired ways, exposing conversions to/from `String` that would be better hidden inside more principled conversions. 
 
-To resolve this tension, `@enum` provides the *implementations* for automatically generated functions as `protected` members of the companion object, leaving you to expose these functions or use them to implement other functions as you wish. These functions can be found in [EnumApi](http://chrisneveu.github.io/macrame/doc/macrame/1.2.1/#macrame.EnumApi) (select "Visibility: All").
+To resolve this tension, `@enum` provides the *implementations* for automatically generated functions as `protected` members of the companion object, leaving you to expose these functions or use them to implement other functions as you wish. These functions can be found in [EnumApi](http://chrisneveu.github.io/macrame/doc/macrame/1.2.2/#macrame.EnumApi) (select "Visibility: All").
 ```scala
 @enum class Color {
    Red
@@ -51,7 +51,7 @@ object Color {
 }
 ```
 
-Macramé also provides a number of [traits](http://chrisneveu.github.io/macrame/doc/macrame/1.2.1/#macrame.enums.package) that expose the most commonly used functionality. The [Macramé-Play](https://github.com/ChrisNeveu/macrame/tree/master/macrame-play) and [Macramé-Scalaz](https://github.com/ChrisNeveu/macrame/tree/master/macrame-scalaz) libraries leverage this approach to provide integration with Play Framework and Scalaz respectively.
+Macramé also provides a number of [traits](http://chrisneveu.github.io/macrame/doc/macrame/1.2.2/#macrame.enums.package) that expose the most commonly used functionality. The [Macramé-Play](https://github.com/ChrisNeveu/macrame/tree/master/macrame-play) and [Macramé-Scalaz](https://github.com/ChrisNeveu/macrame/tree/master/macrame-scalaz) libraries leverage this approach to provide integration with Play Framework and Scalaz respectively.
 
 ### Providing Custom String Representations
 As with `Enumeration`, you can provide custom `String` representations of your enum cases. These can be either a string literal or an identifier pointing to a string. You can mix-and-match the automatically generated representations with manual ones.
