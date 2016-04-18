@@ -1,0 +1,483 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>enums - macrame.enums</title>
+          <meta name="description" content="enums - macrame.enums" />
+          <meta name="keywords" content="enums macrame.enums" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'macrame.enums.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="macrame">macrame</a></p>
+        <h1>enums</h1><span class="permalink">
+      <a href="../../index.html#macrame.enums.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">enums</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="macrame.enums.All" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="All[Enum]extendsStringConverters[Enum]withNumericConverters[Enum]withOrderedModular[Enum]"></a>
+      <a id="All[Enum]:All[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="All.html"><span class="name">All</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <a href="StringConverters.html" class="extype" name="macrame.enums.StringConverters">StringConverters</a>[<span class="extype" name="macrame.enums.All.Enum">Enum</span>] with <a href="NumericConverters.html" class="extype" name="macrame.enums.NumericConverters">NumericConverters</a>[<span class="extype" name="macrame.enums.All.Enum">Enum</span>] with <a href="OrderedModular.html" class="extype" name="macrame.enums.OrderedModular">OrderedModular</a>[<span class="extype" name="macrame.enums.All.Enum">Enum</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@All[Enum]extendsStringConverters[Enum]withNumericConverters[Enum]withOrderedModular[Enum]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This traits provides *all* of the auto-generated functions in <code>EnumApi</code>.</p><div class="fullcomment"><div class="comment cmt"><p>This traits provides *all* of the auto-generated functions in <code>EnumApi</code>.
+It is rare that one actually needs all such functions and it is recommended
+that you use a smaller subset of these functions as provided by the other traits
+in the <code>macrame.enums</code> namespace.
+</p></div></div>
+    </li><li name="macrame.enums.AsInt" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="AsInt[Enum]extendsAnyRef"></a>
+      <a id="AsInt[Enum]:AsInt[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AsInt.html"><span class="name">AsInt</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@AsInt[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides conversion from an enumeration to Int.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides conversion from an enumeration to Int. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> AsInt[Color]</pre><p>This enables the following two ways to convert <code>Color</code> to a <code>Int</code>.</p><pre>Red.asInt
+Color.asInt(Red) <span class="cmt">// returns 0</span></pre></div></div>
+    </li><li name="macrame.enums.AsLong" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="AsLong[Enum]extendsAnyRef"></a>
+      <a id="AsLong[Enum]:AsLong[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AsLong.html"><span class="name">AsLong</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@AsLong[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides conversion from an enumeration to Long.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides conversion from an enumeration to Long. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> AsLong[Color]</pre><p>This enables the following two ways to convert <code>Color</code> to a <code>Long</code>.</p><pre>Red.asLong
+Color.asLong(Red) <span class="cmt">// returns 0l</span></pre></div></div>
+    </li><li name="macrame.enums.AsShort" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="AsShort[Enum]extendsAnyRef"></a>
+      <a id="AsShort[Enum]:AsShort[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AsShort.html"><span class="name">AsShort</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@AsShort[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides conversion from an enumeration to Short.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides conversion from an enumeration to Short. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> AsShort[Color]</pre><p>This enables the following two ways to convert <code>Color</code> to a <code>Short</code>.</p><pre>Red.asShort
+Color.asShort(Red) <span class="cmt">// returns 0</span></pre></div></div>
+    </li><li name="macrame.enums.AsString" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="AsString[Enum]extendsAnyRef"></a>
+      <a id="AsString[Enum]:AsString[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AsString.html"><span class="name">AsString</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@AsString[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides conversion from an enumeration to String.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides conversion from an enumeration to String. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> AsString[Color]</pre><p>This enables the following two ways to convert <code>Color</code> to a <code>String</code>.</p><pre>Red.asString
+Color.asString(Red) <span class="cmt">// returns "Red"</span></pre></div></div>
+    </li><li name="macrame.enums.FromInt" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="FromInt[Enum]extendsAnyRef"></a>
+      <a id="FromInt[Enum]:FromInt[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="FromInt.html"><span class="name">FromInt</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@FromInt[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides conversion from Int to an enumeration.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides conversion from Int to an enumeration. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> FromInt[Color]</pre><p>This creates the following function to convert <code>Int</code> to <code>Option[Color].</code></p><pre>Color.fromInt(<span class="num">0</span>) <span class="cmt">// returns Some(Red)</span></pre></div></div>
+    </li><li name="macrame.enums.FromLong" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="FromLong[Enum]extendsAnyRef"></a>
+      <a id="FromLong[Enum]:FromLong[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="FromLong.html"><span class="name">FromLong</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@FromLong[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides conversion from Long to an enumeration.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides conversion from Long to an enumeration. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> FromLong[Color]</pre><p>This creates the following function to convert <code>Long</code> to <code>Option[Color].</code></p><pre>Color.fromLong(<span class="num">0</span>l) <span class="cmt">// returns Some(Red)</span></pre></div></div>
+    </li><li name="macrame.enums.FromShort" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="FromShort[Enum]extendsAnyRef"></a>
+      <a id="FromShort[Enum]:FromShort[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="FromShort.html"><span class="name">FromShort</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@FromShort[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides conversion from Short to an enumeration.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides conversion from Short to an enumeration. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> FromShort[Color]</pre><p>This creates the following function to convert <code>Short</code> to <code>Option[Color].</code></p><pre>Color.fromShort(<span class="num">0</span> : <span class="std">Short</span>) <span class="cmt">// returns Some(Red)</span></pre></div></div>
+    </li><li name="macrame.enums.FromString" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="FromString[Enum]extendsAnyRef"></a>
+      <a id="FromString[Enum]:FromString[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="FromString.html"><span class="name">FromString</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@FromString[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides conversion from String to an enumeration.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides conversion from String to an enumeration. It works
+by extending the companion object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> FromString[Color]</pre><p>This creates the following function to convert <code>String</code> to <code>Option[Color].</code></p><pre>Color.fromString(<span class="lit">"Red"</span>) <span class="cmt">// returns Some(Red)</span></pre></div></div>
+    </li><li name="macrame.enums.IntConverters" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="IntConverters[Enum]extendsAsInt[Enum]withFromInt[Enum]"></a>
+      <a id="IntConverters[Enum]:IntConverters[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="IntConverters.html"><span class="name">IntConverters</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <a href="AsInt.html" class="extype" name="macrame.enums.AsInt">AsInt</a>[<span class="extype" name="macrame.enums.IntConverters.Enum">Enum</span>] with <a href="FromInt.html" class="extype" name="macrame.enums.FromInt">FromInt</a>[<span class="extype" name="macrame.enums.IntConverters.Enum">Enum</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@IntConverters[Enum]extendsAsInt[Enum]withFromInt[Enum]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides the <code>Int</code>/<code>Enum</code> conversions from <code>AsInt</code> and <code>FromInt</code>.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides the <code>Int</code>/<code>Enum</code> conversions from <code>AsInt</code> and <code>FromInt</code>.
+As with those traits you must extend the companion object of the enumeration.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> IntConverters[Color]</pre></div></div>
+    </li><li name="macrame.enums.LongConverters" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="LongConverters[Enum]extendsAsLong[Enum]withFromLong[Enum]"></a>
+      <a id="LongConverters[Enum]:LongConverters[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="LongConverters.html"><span class="name">LongConverters</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <a href="AsLong.html" class="extype" name="macrame.enums.AsLong">AsLong</a>[<span class="extype" name="macrame.enums.LongConverters.Enum">Enum</span>] with <a href="FromLong.html" class="extype" name="macrame.enums.FromLong">FromLong</a>[<span class="extype" name="macrame.enums.LongConverters.Enum">Enum</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@LongConverters[Enum]extendsAsLong[Enum]withFromLong[Enum]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides the <code>Long</code>/<code>Enum</code> conversions from <code>AsLong</code> and <code>FromLong</code>.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides the <code>Long</code>/<code>Enum</code> conversions from <code>AsLong</code> and <code>FromLong</code>.
+As with those traits you must extend the companion object of the enumeration.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> LongConverters[Color]</pre></div></div>
+    </li><li name="macrame.enums.NumericConverters" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="NumericConverters[Enum]extendsLongConverters[Enum]withShortConverters[Enum]withIntConverters[Enum]"></a>
+      <a id="NumericConverters[Enum]:NumericConverters[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="NumericConverters.html"><span class="name">NumericConverters</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <a href="LongConverters.html" class="extype" name="macrame.enums.LongConverters">LongConverters</a>[<span class="extype" name="macrame.enums.NumericConverters.Enum">Enum</span>] with <a href="ShortConverters.html" class="extype" name="macrame.enums.ShortConverters">ShortConverters</a>[<span class="extype" name="macrame.enums.NumericConverters.Enum">Enum</span>] with <a href="IntConverters.html" class="extype" name="macrame.enums.IntConverters">IntConverters</a>[<span class="extype" name="macrame.enums.NumericConverters.Enum">Enum</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@NumericConverters[Enum]extendsLongConverters[Enum]withShortConverters[Enum]withIntConverters[Enum]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides the numeric/enumeration conversions from <code>IntConverters</code>, <code>ShortConverters</code>, and <code>LongConverters</code>.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides the numeric/enumeration conversions from <code>IntConverters</code>, <code>ShortConverters</code>, and <code>LongConverters</code>.
+As with those traits you must extend the companion object of the enumeration.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> NumericConverters[Color]</pre></div></div>
+    </li><li name="macrame.enums.Ordered" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Ordered[Enum]extendsAnyRef"></a>
+      <a id="Ordered[Enum]:Ordered[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Ordered.html"><span class="name">Ordered</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@Ordered[Enum]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides an <code>Ordering</code> instance for an enumeration as well
+as functions which use that order.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides an <code>Ordering</code> instance for an enumeration as well
+as functions which use that order. It works by extending the companion
+object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> Ordered[Color]</pre><p>This enables the following functions (and more).</p><pre>Red &lt; Blue <span class="cmt">// true</span>
+Blue.next
+Color.next(Blue) <span class="cmt">// yellow</span>
+Yellow &gt;= Yellow <span class="cmt">// true</span>
+Color.first <span class="cmt">// Red</span>
+Color.last <span class="cmt">// Yellow</span></pre></div></div>
+    </li><li name="macrame.enums.OrderedModular" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="OrderedModular[Enum]extendsOrdered[Enum]"></a>
+      <a id="OrderedModular[Enum]:OrderedModular[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="OrderedModular.html"><span class="name">OrderedModular</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <a href="Ordered.html" class="extype" name="macrame.enums.Ordered">Ordered</a>[<span class="extype" name="macrame.enums.OrderedModular.Enum">Enum</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@OrderedModular[Enum]extendsOrdered[Enum]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This traits provides the same interface as <code>Ordered</code> as well as the modular
+ordering functions.</p><div class="fullcomment"><div class="comment cmt"><p>This traits provides the same interface as <code>Ordered</code> as well as the modular
+ordering functions. As with that trait it works by extending the companion
+object of the enumeration class.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> OrderedModular[Color]</pre><p>This enables the following functions.</p><pre>Red.prevMod
+Color.prevMod(Red) <span class="cmt">// Yellow</span>
+Yellow.nextMod
+Color.nextMod(Yellow) <span class="cmt">// Red</span></pre></div></div>
+    </li><li name="macrame.enums.ShortConverters" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="ShortConverters[Enum]extendsAsShort[Enum]withFromShort[Enum]"></a>
+      <a id="ShortConverters[Enum]:ShortConverters[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ShortConverters.html"><span class="name">ShortConverters</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <a href="AsShort.html" class="extype" name="macrame.enums.AsShort">AsShort</a>[<span class="extype" name="macrame.enums.ShortConverters.Enum">Enum</span>] with <a href="FromShort.html" class="extype" name="macrame.enums.FromShort">FromShort</a>[<span class="extype" name="macrame.enums.ShortConverters.Enum">Enum</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@ShortConverters[Enum]extendsAsShort[Enum]withFromShort[Enum]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides the <code>Short</code>/<code>Enum</code> conversions from <code>AsShort</code> and <code>FromShort</code>.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides the <code>Short</code>/<code>Enum</code> conversions from <code>AsShort</code> and <code>FromShort</code>.
+As with those traits you must extend the companion object of the enumeration.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> ShortConverters[Color]</pre></div></div>
+    </li><li name="macrame.enums.StringConverters" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="StringConverters[Enum]extendsAsString[Enum]withFromString[Enum]"></a>
+      <a id="StringConverters[Enum]:StringConverters[Enum]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="StringConverters.html"><span class="name">StringConverters</span></a><span class="tparams">[<span name="Enum">Enum</span>]</span><span class="result"> extends <a href="AsString.html" class="extype" name="macrame.enums.AsString">AsString</a>[<span class="extype" name="macrame.enums.StringConverters.Enum">Enum</span>] with <a href="FromString.html" class="extype" name="macrame.enums.FromString">FromString</a>[<span class="extype" name="macrame.enums.StringConverters.Enum">Enum</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#macrame.enums.package@StringConverters[Enum]extendsAsString[Enum]withFromString[Enum]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This trait provides the <code>String</code>/<code>Enum</code> conversions from <code>AsString</code> and <code>FromString</code>.</p><div class="fullcomment"><div class="comment cmt"><p>This trait provides the <code>String</code>/<code>Enum</code> conversions from <code>AsString</code> and <code>FromString</code>.
+As with those traits you must extend the companion object of the enumeration.</p><pre>@enum <span class="kw">class</span> Color {
+  Red
+  Blue
+  Yellow
+}
+<span class="kw">object</span> Color <span class="kw">extends</span> StringConverters[Color]</pre></div></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
