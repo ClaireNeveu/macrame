@@ -52,6 +52,18 @@ object Color {
 ```
 
 Macramé also provides a number of [traits](http://chrisneveu.github.io/macrame/doc/macrame/1.2.2/#macrame.enums.package) that expose the most commonly used functionality. The [Macramé-Play](https://github.com/ChrisNeveu/macrame/tree/master/macrame-play) and [Macramé-Scalaz](https://github.com/ChrisNeveu/macrame/tree/master/macrame-scalaz) libraries leverage this approach to provide integration with Play Framework and Scalaz respectively.
+```scala
+@enum class Color {
+   Red
+   Blue
+   Yellow
+}
+object Color extends enums.StringConverters[Color]
+// Allows the following:
+// Color.fromString("Red") === Some(Color.Red)
+// Color.Yellow.asString === "Yellow"
+// Color.asString(Color.Yellow) === "Yellow"
+```
 
 ### Providing Custom String Representations
 As with `Enumeration`, you can provide custom `String` representations of your enum cases. These can be either a string literal or an identifier pointing to a string. You can mix-and-match the automatically generated representations with manual ones.
