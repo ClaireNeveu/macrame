@@ -14,11 +14,11 @@ object Build extends Build {
       "macrame",
       file("macrame"),
       settings = commonSettings ++ Seq(
-         version := "1.2.2",
+         version := "1.2.3",
          libraryDependencies ++= Seq(
             "org.scala-lang" % "scala-compiler" % scalaVersion.value,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
-            "org.scalatest" %% "scalatest" % "2.2.4" % "test"),
+            "org.scalatest" %% "scalatest" % "3.0.0" % "test"),
          libraryDependencies ++=
             (CrossVersion.partialVersion(scalaVersion.value) match {
                case Some((2, scalaMajor)) if scalaMajor >= 11 => Seq()
@@ -35,7 +35,7 @@ object Build extends Build {
             "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
             "com.typesafe.play" %% "play" % "[2.5,2.6[" % Provided,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
-            "org.scalatest" %% "scalatest" % "2.2.4" % "test")))
+            "org.scalatest" %% "scalatest" % "3.0.0" % "test")))
 
    lazy val macrameScalaz: Project = Project(
       "macrame-scalaz",
@@ -46,7 +46,7 @@ object Build extends Build {
             "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
             "org.scalaz" %% "scalaz-core" % "[7.2,7.3[" % Provided,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
-            "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+            "org.scalatest" %% "scalatest" % "3.0.0" % "test",
             "org.scalacheck" %% "scalacheck" % "1.12.5" % "test")))
 
    lazy val pomStuff = {
@@ -73,7 +73,7 @@ object Build extends Build {
    lazy val commonSettings = Defaults.defaultSettings ++ scalariformSettings ++Seq(
       organization := "com.chrisneveu",
       scalaVersion := "2.11.8",
-      crossScalaVersions := Seq("2.10.6", "2.11.8"),
+      crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0"),
       scalacOptions ++= Seq(
          "-unchecked",
          "-deprecation",
