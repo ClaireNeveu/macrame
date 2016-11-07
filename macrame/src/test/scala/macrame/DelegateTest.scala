@@ -115,4 +115,12 @@ class DelegateTest extends FunSuite {
       val n1 = new NonCase { val one = a; val alpha = true }
       assertTypeError("""n1.copy()""")
    }
+
+   test("Delegated members with path-dependent types should work.") {
+      assertCompiles("""
+      object Bar {
+         @delegate def foo: Foo.type = Foo
+      }
+      """)
+   }
 }

@@ -35,6 +35,43 @@ object delegate {
       def getType(tpt : Tree) : Type =
          c.typeCheck(q"""(throw new java.lang.Exception("")) : $tpt""").tpe
 
+      def owners(sym : Symbol) : List[Symbol] = {
+         var curr = sym.owner
+         var result = List.empty[Symbol]
+         while (curr != NoSymbol && curr.name.toString != "<root>") {
+            result = curr :: result
+            curr = curr.owner
+         }
+         return result
+      }
+
+      def paramTypeName(param : Symbol, enclosingTypes : List[Symbol]) : Tree = {
+         val typeSymbol = param.typeSignature.typeSymbol
+         val typeVars = enclosingTypes.map(_.name.toTypeName)
+         val (fqpn, _) = (owners(typeSymbol) :+ typeSymbol).filter(_.isType) match {
+            case h :: t ⇒ t.foldLeft[(Tree, Boolean)]((Ident(h.name.toTermName), false)) {
+               case ((res, isType), curr) ⇒
+                  val currIsType = curr.isType && !curr.isPackage
+                  if (isType)
+                     (SelectFromTypeTree(res, curr.name.toTypeName), true)
+                  else
+                     (
+                        Select(
+                           res,
+                           if (currIsType)
+                              curr.name.toTypeName
+                           else
+                              curr.name.toTermName),
+                           isType || currIsType)
+            }
+            case _ ⇒ (EmptyTree, false)
+         }
+         if (fqpn != EmptyTree && !typeVars.contains(typeSymbol.name.toTypeName))
+            fqpn
+         else
+            Ident(typeSymbol.name.toTypeName)
+      }
+
       val (delegateName, delegateType) = delegate match {
          case ValDef(_, name, tpt, _) ⇒
             name -> getType(tpt)
@@ -52,12 +89,13 @@ object delegate {
             !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decoded == "copy")
       ).collect {
          case method : MethodSymbol ⇒
-            val arguments = method.paramss.map(_.map(p ⇒
+            val arguments = method.paramss.map(_.map { p ⇒
                ValDef(
                   Modifiers(PARAM),
                   p.name.toTermName,
-                  Ident(p.typeSignature.typeSymbol.name.toTypeName),
-                  EmptyTree)))
+                  paramTypeName(p, method.typeParams),
+                  EmptyTree)
+            })
             val methodName = method.name.toTermName
             val typeArgs = method.typeParams.map(t ⇒
                TypeDef(
