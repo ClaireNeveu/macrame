@@ -120,8 +120,13 @@ object delegate {
             val rhs = arguments.foldLeft[Tree](methodCall) {
                case (tree, args) ⇒ Apply(tree, args.map(v ⇒ Ident(v.name)))
             }
+            val mods =
+               if (method.isImplicit)
+                  Modifiers(IMPLICIT)
+               else
+                  Modifiers()
             DefDef(
-               Modifiers(),
+               mods,
                methodName,
                typeArgs,
                arguments,
@@ -129,7 +134,7 @@ object delegate {
                rhs)
       }.toList
 
-      //delegatedMembers.foreach(println)
+      // delegatedMembers.foreach(println)
       c.Expr[Any](Block(delegate :: delegatedMembers, Literal(Constant(()))))
    }
 

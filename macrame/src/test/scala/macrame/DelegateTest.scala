@@ -123,4 +123,14 @@ class DelegateTest extends FunSuite {
       }
       """)
    }
+
+   test("Delegated implicit members should be implicit.") {
+      assertCompiles("""
+      object BarImplicit {
+         @delegate def foo: FooImplicit.type = FooImplicit
+      }
+      import BarImplicit._
+      "xxx".get
+      """)
+   }
 }
