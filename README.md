@@ -117,7 +117,7 @@ Delegating to a class member currently has a number of limitations. Due to the w
 
 These limitations do not exist when delegating to a class parameter. In that case any colliding names will not be delegated to. For this reason it is preferred that you use parameter delegation wherever possible.
 
-In both situations it is impossible to delegate to a type defined within the same immediate scope the enclosing class. This is unfortunately a limitation of macro annotations. To workaround this defined any types being delegated to in another file.
+In both situations it is impossible to delegate to a type defined within the same immediate scope as the enclosing class. This is unfortunately a limitation of macro annotations. To workaround this define any types being delegated to in another file.
 
 ## Selecting Members
 Often the key to good boilerplate-elimination, Macramé provides two functions to select members of objects: `members` and `memberMap`. When used inside the selected object, be sure to use type ascriptions otherwise these functions will try to contain themselves.
