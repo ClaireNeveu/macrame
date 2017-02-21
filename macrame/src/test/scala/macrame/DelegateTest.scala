@@ -133,4 +133,17 @@ class DelegateTest extends FunSuite {
       "xxx".get
       """)
    }
+
+   test("Delegated parameters should handle private members.") {
+      final case class Delegate(
+            headline : Option[String] = None) {
+         private val foo : Int = 5
+         private val baz : String = "five"
+      }
+      assertCompiles("""
+      final case class PostContent(
+            headline : Option[String] = None,
+            @delegate un : Delegate)
+      """)
+   }
 }

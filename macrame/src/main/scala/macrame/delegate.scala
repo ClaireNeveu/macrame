@@ -86,7 +86,9 @@ object delegate {
       val delegatedMembers : List[Tree] = delegateType.members.filter(s ⇒
          (containerType.member(s.name) == NoSymbol) &&
             (s.name.decoded != "<init>") &&
-            !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decoded == "copy")
+            !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decoded == "copy") &&
+            !s.isPrivate &&
+            !s.isProtected
       ).collect {
          case method : MethodSymbol ⇒
             val arguments = method.paramss.map(_.map { p ⇒
@@ -167,7 +169,9 @@ object delegate {
                !existingMembers.contains(s.name) &&
                   (containerType.member(s.name) == NoSymbol) &&
                   (s.name.decoded != "<init>") &&
-                  !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decoded == "copy")
+                  !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decoded == "copy") &&
+                  !s.isPrivate &&
+                  !s.isProtected
             ).collect {
                case method : MethodSymbol ⇒
                   val arguments = method.paramss.map(_.map { p ⇒
