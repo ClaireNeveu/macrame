@@ -10,7 +10,7 @@ libraryDependencies ++= Seq(
 ```
 
 ## API Documentation
-Full API documentation is available [here](http://chrisneveu.github.io/macrame/doc/macrame/1.2.2/#package).
+Full API documentation is available [here](http://claireneveu.github.io/macrame/doc/macrame/1.2.2/#package).
 
 ## Enumerations
 Macramé provides an `@enum` macro annotation to replace Scala's `Enumeration` class. Unlike `Enumeration`, `@enum` classes are fully type-safe and provide exhaustiveness checks. `@enum` provides a much larger interface than `Enumeration` but it allows the user to select which functions to expose.
