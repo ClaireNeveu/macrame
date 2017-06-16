@@ -8,7 +8,7 @@ libraryDependencies += "com.chrisneveu" %% "macrame-scalaz" % "1.0.0-scalaz-7.2.
 ```
 
 ## API Documentation
-Full API documentation is available [here](http://chrisneveu.github.io/macrame/doc/macrame-scalaz/1.0.0-scalaz-7.2.x/#package).
+Full API documentation is available [here](http://claireneveu.github.io/macrame/doc/macrame-scalaz/1.0.0-scalaz-7.2.x/#package).
 
 ### Usage
 This example shows how to make a `Semigroup` instance for a `Mod5` enumeration:
