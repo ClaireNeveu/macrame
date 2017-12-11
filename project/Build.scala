@@ -30,10 +30,10 @@ object Build extends Build {
       "macrame-play",
       file("macrame-play"),
       settings = commonSettings ++ Seq(
-         version := "1.1.1-play-2.5.x-SNAPSHOT",
+         version := "1.1.1-play-2.6.x-SNAPSHOT",
          libraryDependencies ++= Seq(
             "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
-            "com.typesafe.play" %% "play" % "[2.5,2.6[" % Provided,
+            "com.typesafe.play" %% "play" % "[2.6,2.7[" % Provided,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
             "org.scalatest" %% "scalatest" % "3.0.0" % "test")))
 
