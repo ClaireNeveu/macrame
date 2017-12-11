@@ -32,7 +32,7 @@ object Build extends Build {
       settings = commonSettings ++ Seq(
          version := "1.1.1-play-2.6.x-SNAPSHOT",
          libraryDependencies ++= Seq(
-            "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
+            "com.kinja" %% "macrame" % "[1.0,2.0[" % Provided,
             "com.typesafe.play" %% "play" % "[2.6,2.7[" % Provided,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
             "org.scalatest" %% "scalatest" % "3.0.0" % "test")))
@@ -43,7 +43,7 @@ object Build extends Build {
       settings = commonSettings ++ Seq(
          version := "1.0.1-scalaz-7.2.x-SNAPSHOT",
          libraryDependencies ++= Seq(
-            "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
+            "com.kinja" %% "macrame" % "[1.0,2.0[" % Provided,
             "org.scalaz" %% "scalaz-core" % "[7.2,7.3[" % Provided,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
             "org.scalatest" %% "scalatest" % "3.0.0" % "test",
@@ -65,13 +65,13 @@ object Build extends Build {
      <developers>
        <developer>
          <name>Chris Neveu</name>
-         <url>chrisneveu.com</url>
+         <url>kinja.com</url>
        </developer>
      </developers>
    }
 
    lazy val commonSettings = Defaults.defaultSettings ++ scalariformSettings ++Seq(
-      organization := "com.chrisneveu",
+      organization := "com.kinja",
       scalaVersion := "2.11.8",
       crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0"),
       scalacOptions ++= Seq(
