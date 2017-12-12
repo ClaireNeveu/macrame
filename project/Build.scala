@@ -58,9 +58,9 @@ object Build extends Build {
        </license>
      </licenses>
      <scm>
-       <connection>scm:git:github.com/ChrisNeveu/macrame.git</connection>
-       <developerConnection>scm:git:git@github.com:ChrisNeveu/macrame.git</developerConnection>
-       <url>git@github.com:ChrisNeveu/macrame</url>
+       <connection>scm:git:github.com/gawkermedia/macrame.git</connection>
+       <developerConnection>scm:git:git@github.com:gawkermedia/macrame.git</developerConnection>
+       <url>git@github.com:gawkermedia/macrame.git</url>
      </scm>
      <developers>
        <developer>
