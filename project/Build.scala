@@ -70,7 +70,7 @@ object Build extends Build {
      </developers>
    }
 
-   lazy val commonSettings = Defaults.defaultSettings ++ scalariformSettings ++Seq(
+   lazy val commonSettings = Defaults.coreDefaultSettings ++ scalariformSettings ++ Seq(
       organization := "com.kinja",
       scalaVersion := "2.11.8",
       crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0"),
