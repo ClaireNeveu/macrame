@@ -4,7 +4,7 @@ Macrame-Scalaz provides instances of several scalaz type-classes for Macramé en
 ## Getting Macramé-Scalaz
 If you're using SBT, add the following to your build file.
 ```scala
-libraryDependencies += "com.chrisneveu" %% "macrame-scalaz" % "1.0.0-scalaz-7.2.x"
+libraryDependencies += "com.kinja" %% "macrame-scalaz" % "1.0.0-scalaz-7.2.x"
 ```
 
 ## API Documentation
