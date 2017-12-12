@@ -2,7 +2,7 @@ package macrame
 
 import macrame.internal.renderName
 
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 import scala.language.experimental.macros
 import scala.annotation.StaticAnnotation
 
@@ -14,7 +14,6 @@ object enum {
 
    def impl(c : Context)(annottees : c.Expr[Any]*) : c.Expr[Any] = {
       import c.universe._
-      import Flag._
 
       case class Case(name : TermName, str : Tree)
 
@@ -36,13 +35,13 @@ object enum {
             impl.body.foreach {
                case Ident(_) ⇒
                case Apply(Ident(_), _ :: Nil) ⇒
-               case DefDef(_, name, _, _, _, _) if name.decoded == "<init>" ⇒
+               case DefDef(_, name, _, _, _, _) if name.decodedName.toString == "<init>" ⇒
                case t ⇒
                   // println(showRaw(t))
                   c.abort(t.pos, "Invalid case in Enum declaration.")
             }
             val init = impl.body.find {
-               case DefDef(_, name, _, _, _, _) if name.decoded == "<init>" ⇒ true
+               case DefDef(_, name, _, _, _, _) if name.decodedName.toString == "<init>" ⇒ true
             }.get
 
             val cases : List[Case] = impl.body.collect {
@@ -107,7 +106,7 @@ object enum {
             """
 
             val className = q"""
-               protected lazy val className : String = ${Enum.decoded.toString}
+               protected lazy val className : String = ${Enum.decodedName.toString}
             """
 
             val apiImpl = List(
