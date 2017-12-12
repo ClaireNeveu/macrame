@@ -2,6 +2,7 @@ package macrame
 
 import org.scalatest.FunSuite
 
+import scala.language.implicitConversions
 import scala.math.Ordering
 
 class EnumTest extends FunSuite {

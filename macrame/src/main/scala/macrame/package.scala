@@ -1,5 +1,5 @@
 import language.experimental.macros
-import reflect.macros.Context
+import reflect.macros.whitebox.Context
 import macrame.{ internal ⇒ fn }
 
 package object macrame {
@@ -84,7 +84,7 @@ package object macrame {
          fn.sequenceExpr(c)(
             fn.members[T](c)(obj)
                .map(s ⇒ fn.renderName(s.name))
-               .map(n ⇒ c.Expr[T](c.universe.Select(obj.tree, c.universe.newTermName(n))))
+               .map(n ⇒ c.Expr[T](c.universe.Select(obj.tree, c.universe.TermName(n))))
          )
 
       def memberMap[T : c.WeakTypeTag](c : Context)(obj : c.Expr[Object]) : c.Expr[Map[String, T]] = {
@@ -95,9 +95,9 @@ package object macrame {
             .map(n ⇒
                // ("n", obj.n)
                c.Expr[(String, T)](
-                  Apply(Select(Ident(newTermName("Tuple2")), newTermName("apply")), List(
+                  Apply(Select(Ident(TermName("Tuple2")), TermName("apply")), List(
                      Literal(Constant(n)),
-                     Select(obj.tree, newTermName(n)))
+                     Select(obj.tree, TermName(n)))
                   )
                )
             )

@@ -4,7 +4,7 @@ Macrame-Play provides `Reads`, `Writes`,`Format`, `QueryStringBindable`, and `Pa
 ## Getting Macramé-Play
 If you're using SBT, add the following to your build file.
 ```scala
-libraryDependencies += "com.chrisneveu" %% "macrame-play" % "1.1.0-play-2.5.x"
+libraryDependencies += "com.kinja" %% "macrame-play" % "1.1.0-play-2.5.x"
 ```
 
 ## API Documentation

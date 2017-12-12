@@ -1,6 +1,6 @@
 package macrame
 
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 package object internal {
 
@@ -27,7 +27,7 @@ package object internal {
       import c.universe._
       c.Expr[List[T]](
          Apply(
-            Select(Ident(newTermName("List")), newTermName("apply")),
+            Select(Ident(TermName("List")), TermName("apply")),
             expressions.map(_.tree).toList
          )
       )

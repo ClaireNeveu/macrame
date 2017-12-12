@@ -1,8 +1,6 @@
 package macrame
 
-import macrame.internal.renderName
-
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 import scala.language.experimental.macros
 import scala.annotation.StaticAnnotation
 
@@ -33,7 +31,7 @@ object delegate {
       import Flag._
 
       def getType(tpt : Tree) : Type =
-         c.typeCheck(q"""(throw new java.lang.Exception("")) : $tpt""").tpe
+         c.typecheck(q"""(throw new java.lang.Exception("")) : $tpt""").tpe
 
       def owners(sym : Symbol) : List[Symbol] = {
          var curr = sym.owner
@@ -85,13 +83,13 @@ object delegate {
 
       val delegatedMembers : List[Tree] = delegateType.members.filter(s ⇒
          (containerType.member(s.name) == NoSymbol) &&
-            (s.name.decoded != "<init>") &&
-            !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decoded == "copy") &&
+            (s.name.decodedName.toString != "<init>") &&
+            !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decodedName.toString == "copy") &&
             !s.isPrivate &&
             !s.isProtected
       ).collect {
          case method : MethodSymbol ⇒
-            val arguments = method.paramss.map(_.map { p ⇒
+            val arguments = method.paramLists.map(_.map { p ⇒
                ValDef(
                   Modifiers(PARAM),
                   p.name.toTermName,
@@ -149,7 +147,7 @@ object delegate {
       import Flag._
 
       def getType(tpt : Tree) : Type =
-         c.typeCheck(q"""(throw new java.lang.Exception("")) : $tpt""").tpe
+         c.typecheck(q"""(throw new java.lang.Exception("")) : $tpt""").tpe
 
       val (delegateName, delegateType) = delegate match {
          case ValDef(_, name, tpt, _) ⇒
@@ -164,17 +162,17 @@ object delegate {
                case ValDef(_, name, _, _)       ⇒ List(name)
                case t                           ⇒ Nil
             }
-            val containerType = c.typeCheck(q"""(throw new java.lang.Exception("")) : Object with ..${impl.parents}""").tpe
+            val containerType = c.typecheck(q"""(throw new java.lang.Exception("")) : Object with ..${impl.parents}""").tpe
             val delegatedMembers = delegateType.members.filter(s ⇒
                !existingMembers.contains(s.name) &&
                   (containerType.member(s.name) == NoSymbol) &&
-                  (s.name.decoded != "<init>") &&
-                  !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decoded == "copy") &&
+                  (s.name.decodedName.toString != "<init>") &&
+                  !(delegateType.typeSymbol.asClass.isCaseClass && s.name.decodedName.toString == "copy") &&
                   !s.isPrivate &&
                   !s.isProtected
             ).collect {
                case method : MethodSymbol ⇒
-                  val arguments = method.paramss.map(_.map { p ⇒
+                  val arguments = method.paramLists.map(_.map { p ⇒
                      val typeSignature = p.typeSignature match {
                         case TypeRef(NoPrefix, t, Nil) ⇒
                            Ident(p.typeSignature.typeSymbol.name.toTypeName)
