@@ -14,7 +14,7 @@ object Build extends Build {
       "macrame",
       file("macrame"),
       settings = commonSettings ++ Seq(
-         version := "1.2.6-SNAPSHOT",
+         version := "1.2.6",
          libraryDependencies ++= Seq(
             "org.scala-lang" % "scala-compiler" % scalaVersion.value,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
@@ -30,9 +30,9 @@ object Build extends Build {
       "macrame-play",
       file("macrame-play"),
       settings = commonSettings ++ Seq(
-         version := "1.1.1-play-2.5.x-SNAPSHOT",
+         version := "1.1.1-play-2.5.x",
          libraryDependencies ++= Seq(
-            "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
+            "com.claireneveu" %% "macrame" % "[1.0,2.0[" % Provided,
             "com.typesafe.play" %% "play" % "[2.5,2.6[" % Provided,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
             "org.scalatest" %% "scalatest" % "3.0.0" % "test")))
@@ -41,37 +41,37 @@ object Build extends Build {
       "macrame-scalaz",
       file("macrame-scalaz"),
       settings = commonSettings ++ Seq(
-         version := "1.0.1-scalaz-7.2.x-SNAPSHOT",
+         version := "1.0.1-scalaz-7.2.x",
          libraryDependencies ++= Seq(
-            "com.chrisneveu" %% "macrame" % "[1.0,2.0[" % Provided,
+            "com.claireneveu" %% "macrame" % "[1.0,2.0[" % Provided,
             "org.scalaz" %% "scalaz-core" % "[7.2,7.3[" % Provided,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" % "test" cross CrossVersion.full),
             "org.scalatest" %% "scalatest" % "3.0.0" % "test",
             "org.scalacheck" %% "scalacheck" % "1.12.5" % "test")))
 
    lazy val pomStuff = {
-     <url>https://github.com/ChrisNeveu/macrame</url>
+     <url>https://github.com//macrame</url>
      <licenses>
        <license>
          <name>BSD 3-Clause</name>
-         <url>https://raw.githubusercontent.com/ChrisNeveu/macrame/master/LICENSE</url>
+         <url>https://raw.githubusercontent.com/ClaireNeveu/macrame/master/LICENSE</url>
        </license>
      </licenses>
      <scm>
-       <connection>scm:git:github.com/ChrisNeveu/macrame.git</connection>
-       <developerConnection>scm:git:git@github.com:ChrisNeveu/macrame.git</developerConnection>
-       <url>git@github.com:ChrisNeveu/macrame</url>
+       <connection>scm:git:github.com/ClaireNeveu/macrame.git</connection>
+       <developerConnection>scm:git:git@github.com:ClaireNeveu/macrame.git</developerConnection>
+       <url>git@github.com:ClaireNeveu/macrame</url>
      </scm>
      <developers>
        <developer>
-         <name>Chris Neveu</name>
-         <url>chrisneveu.com</url>
+         <name>Claire Neveu</name>
+         <url>claireneveu.com</url>
        </developer>
      </developers>
    }
 
    lazy val commonSettings = Defaults.defaultSettings ++ scalariformSettings ++Seq(
-      organization := "com.chrisneveu",
+      organization := "com.claireneveu",
       scalaVersion := "2.11.8",
       crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0"),
       scalacOptions ++= Seq(

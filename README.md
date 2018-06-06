@@ -5,7 +5,7 @@ Macrame provides macro-based replacements for parts of the Scala standard librar
 If you're using SBT, add the following to your build file.
 ```scala
 libraryDependencies ++= Seq(
-   "com.chrisneveu" %% "macrame" % "1.2.5",
+   "com.claireneveu" %% "macrame" % "1.2.5",
    compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full))
 ```
 
@@ -36,7 +36,7 @@ object Color extends EnumApi[Color] {
 ### Using EnumApi
 In order to reduce boilerplate, the `@enum` macro defines a number of convenient functions on your enumeration type. Auto-generated functions are great but they often increase your API in undesired ways, exposing conversions to/from `String` that would be better hidden inside more principled conversions. 
 
-To resolve this tension, `@enum` provides the *implementations* for automatically generated functions as `protected` members of the companion object, leaving you to expose these functions or use them to implement other functions as you wish. These functions can be found in [EnumApi](http://chrisneveu.github.io/macrame/doc/macrame/1.2.2/#macrame.EnumApi) (select "Visibility: All").
+To resolve this tension, `@enum` provides the *implementations* for automatically generated functions as `protected` members of the companion object, leaving you to expose these functions or use them to implement other functions as you wish. These functions can be found in [EnumApi](http://claireneveu.github.io/macrame/doc/macrame/1.2.2/#macrame.EnumApi) (select "Visibility: All").
 ```scala
 @enum class Color {
    Red
@@ -51,7 +51,7 @@ object Color {
 }
 ```
 
-Macramé also provides a number of [traits](http://chrisneveu.github.io/macrame/doc/macrame/1.2.2/#macrame.enums.package) that expose the most commonly used functionality. The [Macramé-Play](https://github.com/ChrisNeveu/macrame/tree/master/macrame-play) and [Macramé-Scalaz](https://github.com/ChrisNeveu/macrame/tree/master/macrame-scalaz) libraries leverage this approach to provide integration with Play Framework and Scalaz respectively.
+Macramé also provides a number of [traits](http://claireneveu.github.io/macrame/doc/macrame/1.2.2/#macrame.enums.package) that expose the most commonly used functionality. The [Macramé-Play](https://github.com/ClaireNeveu/macrame/tree/master/macrame-play) and [Macramé-Scalaz](https://github.com/ClaireNeveu/macrame/tree/master/macrame-scalaz) libraries leverage this approach to provide integration with Play Framework and Scalaz respectively.
 ```scala
 @enum class Color {
    Red
