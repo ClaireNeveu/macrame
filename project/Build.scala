@@ -14,7 +14,7 @@ object Build extends Build {
       "macrame",
       file("macrame"),
       settings = commonSettings ++ Seq(
-         version := "1.2.6",
+         version := "1.2.7-SNAPSHOT",
          libraryDependencies ++= Seq(
             "org.scala-lang" % "scala-compiler" % scalaVersion.value,
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
@@ -30,7 +30,7 @@ object Build extends Build {
       "macrame-play",
       file("macrame-play"),
       settings = commonSettings ++ Seq(
-         version := "1.1.1-play-2.5.x",
+         version := "1.1.2-play-2.5.x-SNAPSHOT",
          libraryDependencies ++= Seq(
             "com.claireneveu" %% "macrame" % "[1.0,2.0[" % Provided,
             "com.typesafe.play" %% "play" % "[2.5,2.6[" % Provided,
@@ -41,7 +41,7 @@ object Build extends Build {
       "macrame-scalaz",
       file("macrame-scalaz"),
       settings = commonSettings ++ Seq(
-         version := "1.0.1-scalaz-7.2.x",
+         version := "1.0.2-scalaz-7.2.x-SNAPSHOT",
          libraryDependencies ++= Seq(
             "com.claireneveu" %% "macrame" % "[1.0,2.0[" % Provided,
             "org.scalaz" %% "scalaz-core" % "[7.2,7.3[" % Provided,
